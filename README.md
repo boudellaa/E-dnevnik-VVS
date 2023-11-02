@@ -1,1 +1,1 @@
-# E-dnevnik-VVS-
+# E-dnevnik-VVS
