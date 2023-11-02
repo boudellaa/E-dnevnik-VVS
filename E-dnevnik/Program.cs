@@ -29,11 +29,20 @@ public class Program
         skola.DodajRazred(razred2);
 
         skola.PrikaziRazrede();
+        string korisnickoIme="";
+        string sifra = "";
+        do {
+            Console.WriteLine("Unesite korisničko ime: ");
+            korisnickoIme = Console.ReadLine();
+        } while (korisnickoIme.Length == 0);
+        do
+        {
+            Console.WriteLine("Unesite korisničko ime: ");
+            sifra = Console.ReadLine();
+        } while (sifra.Length == 0);
 
-        razred1.PrikaziUcenike();
-        razred2.PrikaziUcenike();
 
-        predmet1.PrikaziUcenike();
-        predmet2.PrikaziUcenike();
+        Console.WriteLine("Unesite lozinku: ");
+        string lozinka = Console.ReadLine();
     }
 }
