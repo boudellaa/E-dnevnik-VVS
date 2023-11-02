@@ -25,6 +25,15 @@ namespace E_dnevnik
             Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan na predmet {Ime}.");
         }
 
+        public List<Ucenik> DajSveUcenike()
+        {
+            if (Ucenici.Count == 0)
+            {
+                throw new Exception("Na predmetu nema prijavljenih ucenika!");
+            }
+            return Ucenici;
+        }
+
         public void PrikaziUcenike()
         {
             if (Ucenici.Count == 0)

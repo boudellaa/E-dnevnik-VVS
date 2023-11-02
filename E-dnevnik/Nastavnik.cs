@@ -15,13 +15,14 @@ namespace E_dnevnik
         public string KorisnickoIme { get; set; }
 
         public string Sifra { get; set; }
-        public List<Ucenik> Ucenici { get; set; }
+        
+        public List<Predmet> Predmeti { get; set; } 
 
         public Nastavnik(string ime, string prezime)
         {
             Ime = ime;
             Prezime = prezime;
-            Ucenici = new List<Ucenik>();
+            
         }
 
         public void DodajOcjenuUceniku(Ucenik ucenik, int ocjena)
@@ -29,27 +30,71 @@ namespace E_dnevnik
             ucenik.DodajOcjenu(ocjena);
         }
 
-        public void PrikaziSvojeUcenike()
+
+		public IEnumerable<Ucenik> DajSvojeUcenike()
+		{
+			List<Ucenik> temp = new List<Ucenik>();
+			if (Predmeti.Count == 0)
+			{
+				throw new InvalidOperationException("Nastavnik nema predmeta.");
+			}
+
+			Console.WriteLine($"Učenici nastavnika {Ime} {Prezime}:");
+
+			foreach (var predmet in Predmeti)
+			{
+				try
+				{
+					foreach (var ucenik in predmet.DajSveUcenike())
+					{
+						temp.Add(ucenik);
+					}
+				}
+				catch (Exception e)
+				{
+					continue;
+				}
+			}
+			if (temp.Count == 0) throw new Exception("Nastavnik nema učenika!");
+			return temp;
+		}
+
+		/*      public void PrikaziSvojeUcenike()
+			  {
+				  if (Predmeti.Count == 0)
+				  {
+					  throw new InvalidOperationException("Nastavnik nema predmeta.");
+				  }
+
+				  Console.WriteLine($"Učenici nastavnika {Ime} {Prezime}:");
+				  foreach (var ucenik in Ucenici)
+				  {
+					  Console.WriteLine($"{ucenik.Ime} {ucenik.Prezime}");
+				  }
+			  }
+		*/
+		public Double IzracunajProsjekRazreda()
         {
-            if (Ucenici.Count == 0)
-            {
-                throw new InvalidOperationException("Nastavnik nema učenika.");
-            }
-            Console.WriteLine($"Učenici nastavnika {Ime} {Prezime}:");
-            foreach (var ucenik in Ucenici)
-            {
-                Console.WriteLine($"{ucenik.Ime} {ucenik.Prezime}");
-            }
+			try
+			{
+				var ucenici = DajSvojeUcenike();
+				return ucenici.Average(u => u.Ocjene.Average());
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+            
         }
 
-        public void IzracunajProsjekRazreda()
+        public Komentar UnesiKomentar(String opis, Ucenik ucenik)
         {
-            if (Ucenici.Count == 0)
+            if (opis == null)
             {
-                throw new InvalidOperationException("Nastavnik nema učenika.");
+                throw new Exception("Komentar ne može biti prazan!");
             }
-            double prosjek = Ucenici.Average(u => u.Ocjene.Average());
-            Console.WriteLine($"Prosjek ocjena razreda nastavnika {Ime} {Prezime} je {prosjek:F2}.");
+            return new Komentar(this, ucenik, opis);
         }
     }
 

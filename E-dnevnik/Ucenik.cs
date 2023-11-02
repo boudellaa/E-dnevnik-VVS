@@ -12,11 +12,14 @@ namespace E_dnevnik
         public string Prezime { get; set; }
         public List<int> Ocjene { get; set; }
 
+        public List<Komentar> Komentari {  get; set; }
+
         public Ucenik(string ime, string prezime)
         {
             Ime = ime;
             Prezime = prezime;
             Ocjene = new List<int>();
+            Komentari = new List<Komentar>();
         }
 
         public void DodajOcjenu(int ocjena)

@@ -42,3 +42,17 @@ C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\re
 C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.pdb
 C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.genruntimeconfig.cache
 C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\ref\E-dnevnik.dll
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnevnik.exe
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnevnik.deps.json
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnevnik.runtimeconfig.json
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnevnik.dll
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnevnik.pdb
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.AssemblyInfoInputs.cache
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.AssemblyInfo.cs
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.CoreCompileInputs.cache
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.dll
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\refint\E-dnevnik.dll
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.pdb
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.genruntimeconfig.cache
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\ref\E-dnevnik.dll
