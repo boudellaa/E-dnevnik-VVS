@@ -10,13 +10,19 @@ namespace E_dnevnik
     {
         public string Ime { get; set; }
         public string Prezime { get; set; }
+
+        public string KorisnickoIme { get; set; }
+
+        public string Sifra {  get; set; }
         public List<int> Ocjene { get; set; }
 
-        public Ucenik(string ime, string prezime)
+        public Ucenik(string ime, string prezime, string korisnickoIme, string sifra)
         {
             Ime = ime;
             Prezime = prezime;
             Ocjene = new List<int>();
+            KorisnickoIme = korisnickoIme;
+            Sifra = sifra;
         }
 
         public void DodajOcjenu(int ocjena)

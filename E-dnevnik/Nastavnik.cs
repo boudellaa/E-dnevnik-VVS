@@ -17,11 +17,13 @@ namespace E_dnevnik
         public string Sifra { get; set; }
         public List<Ucenik> Ucenici { get; set; }
 
-        public Nastavnik(string ime, string prezime)
+        public Nastavnik(string ime, string prezime,string korisnickoIme, string sifra)
         {
             Ime = ime;
             Prezime = prezime;
             Ucenici = new List<Ucenik>();
+            KorisnickoIme = korisnickoIme;
+            Sifra = sifra;
         }
 
         public void DodajOcjenuUceniku(Ucenik ucenik, int ocjena)
