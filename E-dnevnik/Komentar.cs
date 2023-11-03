@@ -9,9 +9,12 @@ namespace E_dnevnik
 	public class Komentar
 	{
 		public Ucenik Ucenik { get; set; }
+
 		public Nastavnik Nastavnik { get; set; }
 
 		public String Opis{ get; set; }
+
+		
 
 		public Komentar(Nastavnik nastavnik, Ucenik ucenik, String opis)
 		{

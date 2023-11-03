@@ -8,21 +8,25 @@ namespace E_dnevnik
 {
     public class Ucenik
     {
+
+
         public string Ime { get; set; }
         public string Prezime { get; set; }
 
         public string KorisnickoIme { get; set; }
 
-        public string Sifra {  get; set; }
+        public string Sifra { get; set; }
 
         public List<Ocjena> Ocjene { get; set; }
 
-        public List<Komentar> Komentari {  get; set; }
+        public List<Komentar> Komentari { get; set; }
 
         public Razred Razred { get; set; }
 
-        public Ucenik(string ime, string prezime, string korisnickoIme, string sifra)
-        {
+       
+
+        public Ucenik( string ime, string prezime, string korisnickoIme, string sifra)
+        {    
             Ime = ime;
             Prezime = prezime;
             KorisnickoIme = korisnickoIme;
@@ -61,7 +65,15 @@ namespace E_dnevnik
         }
         public List<Predmet> DajMojePredmete()
         {
-            return Razred.Predmeti;
+            var temp = new List<Predmet>();
+
+            
+            foreach(var x in Razred.Razredi_Predmeti.Where(p => p.Razred == Razred))
+            {
+                temp.Add(x.Predmet);
+            }
+            return temp;
+
         }
     }
 

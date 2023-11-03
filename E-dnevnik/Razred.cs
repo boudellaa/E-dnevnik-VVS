@@ -11,13 +11,14 @@ namespace E_dnevnik
         public string Ime { get; set; }
         public List<Ucenik> Ucenici { get; set; }
 
-        public List<Predmet> Predmeti { get; set; }
-        
-        public Razred(string ime)
+		public List<Razred_Predmet> Razredi_Predmeti { get; set; }
+
+
+		public Razred(string ime)
         {
             Ime = ime;
             Ucenici = new List<Ucenik>();
-            Predmeti = new List<Predmet>();
+           
             
         }
 
@@ -27,11 +28,11 @@ namespace E_dnevnik
             Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
         }
 
-        public void DodajPredmet(Predmet predmet)
-        {
-            Predmeti.Add(predmet);
-            //Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
-        }
+        //public void DodajPredmet(Predmet predmet)
+        //{
+        //    Predmeti.Add(predmet);
+        //    //Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
+        //}
 
         public void IzbaciUcenika(Ucenik ucenik)
         {
@@ -39,10 +40,10 @@ namespace E_dnevnik
             Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} izbačen iz razreda {Ime}.");
         }
 
-        public void IzbaciPredmet(Predmet predmet)
-        {
-            Predmeti.Remove(predmet);
-        }
+        //public void IzbaciPredmet(Predmet predmet)
+        //{
+        //    Predmeti.Remove(predmet);
+        //}
     }
 
 

@@ -14,6 +14,7 @@ namespace E_dnevnik
 
         public Predmet Predmet { get; set; }
 
+
         public Ocjena() { }
 
         public Ocjena(int vrijednost,Ucenik ucenik, Predmet predmet)
