@@ -19,10 +19,12 @@ namespace E_dnevnik
 
         public List<Komentar> Komentari {  get; set; }
 
-        public Ucenik(string ime, string prezime)
+        public Ucenik(string ime, string prezime, string korisnickoIme, string sifra)
         {
             Ime = ime;
             Prezime = prezime;
+            KorisnickoIme = korisnickoIme;
+            Sifra = sifra;
             Ocjene = new List<int>();
             Komentari = new List<Komentar>();
         }

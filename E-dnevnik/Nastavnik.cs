@@ -18,13 +18,13 @@ namespace E_dnevnik
 
         public string Sifra { get; set; }
 
-        public List<Predmet> predmeti { get; set; }
+        public List<Predmet> Predmeti { get; set; }
 
         public Nastavnik(string ime, string prezime,string korisnickoIme, string sifra)
         {
             Ime = ime;
             Prezime = prezime;
-            predmeti = new List<Predmet>();
+            Predmeti = new List<Predmet>();
             KorisnickoIme = korisnickoIme;
             Sifra = sifra;
         }
