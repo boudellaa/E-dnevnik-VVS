@@ -14,6 +14,7 @@ namespace E_dnevnik
         public string KorisnickoIme { get; set; }
 
         public string Sifra {  get; set; }
+
         public List<int> Ocjene { get; set; }
 
         public Ucenik(string ime, string prezime, string korisnickoIme, string sifra)

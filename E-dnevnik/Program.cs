@@ -128,8 +128,8 @@ public class Program
             Console.Clear();
             Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
             Console.WriteLine("Unesite: ");
-            Console.WriteLine("1 za pregled razreda kojima predajete");
-            Console.WriteLine("2 za pregled predmeta koje predajete");
+            Console.WriteLine("1 za pregled predmeta koje predajete");
+            Console.WriteLine("2 za pregled razreda kojima predajete");
             Console.WriteLine("0 za povratak unazad");
             string opcija = Console.ReadLine();
             switch (opcija)
@@ -137,10 +137,10 @@ public class Program
                 case "0":
                     return;
                 case "1":
-                    prikaziNastavnikoveRazrede(nastavnik);
+                    prikaziNastavnikovePredmete(nastavnik);
                     break;
                 case "2":
-                    prikaziNastavnikovePredmete(nastavnik);
+                    prikaziNastavnikoveRazrede(nastavnik);
                     break;
             }
         }
@@ -149,11 +149,57 @@ public class Program
 
     private static void prikaziNastavnikovePredmete(Nastavnik nastavnik)
     {
-        Console.Clear();
-        Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
         
-
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
+            Console.WriteLine("Ovo su vaši predmeti: ");
+            for (int i = 0; i < predmeti.Count; i++)
+            {
+                Console.WriteLine(i + 1 + ". predmet: " + predmeti[i].Ime);
+            }
+        
+                if (predmeti.Count > 0)
+                    Console.WriteLine("Unesite redni broj predmeta za prikaz predmeta ili 0 za nazad");
+                else
+                {
+                    Console.WriteLine("Trenutno ne predajete ni jedan predmet!");
+                    Console.WriteLine("Unesite 0 za nazad");
+                }
+                int broj = Convert.ToInt32(Console.ReadLine());
+                if (broj == 0) return;
+                if (broj < 0 || broj > predmeti.Count)
+                {
+                    Console.WriteLine("Odabrali ste nepostojeci predmet!");
+                    continue;
+                }
+                else prikaziNastavnikovPredmet(predmeti[broj-1]);
+        }
     }
+    private static void prikaziNastavnikovPredmet(Predmet predmet)
+    {
+        Console.Clear();
+        while (true)
+        {
+            Console.WriteLine("Dobrodošli nastavniče " + predmet.Nastavnik.Ime + " " + predmet.Nastavnik.Prezime);
+            Console.WriteLine("Ovo je predmet " + predmet.Ime);
+            Console.WriteLine("Ovo su učenici koji slušaju ovaju predmet: ");
+            for (int i = 0; i < predmet.Ucenici.Count; i++)
+            {
+                Console.WriteLine(i + 1 + ". ucenik: " + predmet.Ucenici[i].Ime + " " + predmet.Ucenici[i].Prezime);
+            }
+            while (true)
+            {
+                Console.WriteLine("Unesite 0 za nazad");
+                int broj = Convert.ToInt32(Console.ReadLine());
+                if (broj == 0) return;
+                else Console.WriteLine("Neispravan unos! ");
+            }
+            
+        }
+    }
+
 
     private static void prikaziNastavnikoveRazrede(Nastavnik nastavnik)
     {
