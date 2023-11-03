@@ -10,19 +10,23 @@ namespace E_dnevnik
     public class Nastavnik
     {
         public string Ime { get; set; }
+
         public string Prezime { get; set; }
+
 
         public string KorisnickoIme { get; set; }
 
         public string Sifra { get; set; }
-        
-        public List<Predmet> Predmeti { get; set; } 
 
-        public Nastavnik(string ime, string prezime)
+        public List<Predmet> predmeti { get; set; }
+
+        public Nastavnik(string ime, string prezime,string korisnickoIme, string sifra)
         {
             Ime = ime;
             Prezime = prezime;
-            
+            predmeti = new List<Predmet>();
+            KorisnickoIme = korisnickoIme;
+            Sifra = sifra;
         }
 
         public void DodajOcjenuUceniku(Ucenik ucenik, int ocjena)

@@ -10,6 +10,11 @@ namespace E_dnevnik
     {
         public string Ime { get; set; }
         public string Prezime { get; set; }
+
+        public string KorisnickoIme { get; set; }
+
+        public string Sifra {  get; set; }
+
         public List<int> Ocjene { get; set; }
 
         public List<Komentar> Komentari {  get; set; }
@@ -39,6 +44,15 @@ namespace E_dnevnik
                 throw new InvalidOperationException("Učenik nema ocjena.");
             }
             Console.WriteLine($"Ocjene učenika {Ime} {Prezime}: {string.Join(", ", Ocjene)}");
+        }
+        public List<Predmet> DajMojePredmete(List<Predmet> predmeti)
+        {
+            for(int i=0;i<predmeti.Count;i++)
+            {
+                if (!predmeti[i].Ucenici.Any(ucenik => ucenik.KorisnickoIme == KorisnickoIme))
+                    predmeti.Remove(predmeti[i]);
+            }
+            return predmeti;
         }
     }
 
