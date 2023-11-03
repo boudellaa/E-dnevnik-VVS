@@ -29,12 +29,9 @@ namespace E_dnevnik
             Sifra = sifra;
         }
 
-        public void DodajOcjenuUceniku(Ucenik ucenik, int ocjena)
-        {
-            ucenik.DodajOcjenu(ocjena);
-        }
 
 
+        /*
 		public IEnumerable<Ucenik> DajSvojeUcenike()
 		{
 			List<Ucenik> temp = new List<Ucenik>();
@@ -63,20 +60,8 @@ namespace E_dnevnik
 			return temp;
 		}
 
-		/*      public void PrikaziSvojeUcenike()
-			  {
-				  if (Predmeti.Count == 0)
-				  {
-					  throw new InvalidOperationException("Nastavnik nema predmeta.");
-				  }
-
-				  Console.WriteLine($"Učenici nastavnika {Ime} {Prezime}:");
-				  foreach (var ucenik in Ucenici)
-				  {
-					  Console.WriteLine($"{ucenik.Ime} {ucenik.Prezime}");
-				  }
-			  }
-		*/
+		      
+		
 		public Double IzracunajProsjekRazreda()
         {
 			try
@@ -91,7 +76,7 @@ namespace E_dnevnik
 			}
             
         }
-
+		
         public Komentar UnesiKomentar(String opis, Ucenik ucenik)
         {
             if (opis == null)
@@ -100,6 +85,7 @@ namespace E_dnevnik
             }
             return new Komentar(this, ucenik, opis);
         }
+		*/
     }
 
 }
