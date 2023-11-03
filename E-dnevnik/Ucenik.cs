@@ -15,9 +15,11 @@ namespace E_dnevnik
 
         public string Sifra {  get; set; }
 
-        public List<int> Ocjene { get; set; }
+        public List<Ocjena> Ocjene { get; set; }
 
         public List<Komentar> Komentari {  get; set; }
+
+        public Razred Razred { get; set; }
 
         public Ucenik(string ime, string prezime, string korisnickoIme, string sifra)
         {
@@ -25,13 +27,23 @@ namespace E_dnevnik
             Prezime = prezime;
             KorisnickoIme = korisnickoIme;
             Sifra = sifra;
-            Ocjene = new List<int>();
+            Ocjene = new List<Ocjena>();
             Komentari = new List<Komentar>();
         }
-
-        public void DodajOcjenu(int ocjena)
+        public Ucenik(string ime, string prezime, string korisnickoIme, string sifra, Razred razred)
         {
-            if (ocjena < 1 || ocjena > 5)
+            Ime = ime;
+            Prezime = prezime;
+            KorisnickoIme = korisnickoIme;
+            Sifra = sifra;
+            Ocjene = new List<Ocjena>();
+            Komentari = new List<Komentar>();
+            Razred = razred;
+        }
+
+        public void DodajOcjenu(Ocjena ocjena)
+        {
+            if (ocjena.Vrijednost < 1 || ocjena.Vrijednost > 5)
             {
                 throw new ArgumentOutOfRangeException("Ocjena mora biti između 1 i 5.");
             }
@@ -47,14 +59,9 @@ namespace E_dnevnik
             }
             Console.WriteLine($"Ocjene učenika {Ime} {Prezime}: {string.Join(", ", Ocjene)}");
         }
-        public List<Predmet> DajMojePredmete(List<Predmet> predmeti)
+        public List<Predmet> DajMojePredmete()
         {
-            for(int i=0;i<predmeti.Count;i++)
-            {
-                if (!predmeti[i].Ucenici.Any(ucenik => ucenik.KorisnickoIme == KorisnickoIme))
-                    predmeti.Remove(predmeti[i]);
-            }
-            return predmeti;
+            return Razred.Predmeti;
         }
     }
 

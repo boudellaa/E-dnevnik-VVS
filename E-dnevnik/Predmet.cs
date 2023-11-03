@@ -9,39 +9,40 @@ namespace E_dnevnik
     public class Predmet
     {
         public string Ime { get; set; }
-        public List<Ucenik> Ucenici { get; set; }
+        public List<Razred> Razredi { get; set; }
         public Nastavnik Nastavnik { get; set; }
 
         public Predmet(string ime, Nastavnik nastavnik)
         {
             Ime = ime;
-            Ucenici = new List<Ucenik>();
+            Razredi = new List<Razred>();
             Nastavnik = nastavnik;
          }
-        public Predmet(string ime, List<Ucenik> ucenici,Nastavnik nastavnik)
+        public Predmet(string ime, List<Razred> razredi,Nastavnik nastavnik)
         {
             Ime = ime;
-            Ucenici = ucenici;
+            Razredi = razredi;
             Nastavnik = nastavnik;
         }
 
 
-        public void DodajUcenika(Ucenik ucenik)
+        public void DodajRazred(Razred razred)
         {
-            Ucenici.Add(ucenik);
-            Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan na predmet {Ime}.");
+            Razredi.Add(razred);
+            Console.WriteLine($"Razred {razred.Ime} dodan na predmet {Ime}.");
         }
 
         public List<Ucenik> DajSveUcenike()
         {
-            if (Ucenici.Count == 0)
+            List<Ucenik> ucenici = new List<Ucenik>();
+            foreach (Razred razred in Razredi)
             {
-                throw new Exception("Na predmetu nema prijavljenih ucenika!");
+                ucenici.AddRange(razred.Ucenici);
             }
-            return Ucenici;
+            return ucenici;
         }
 
-        public void PrikaziUcenike()
+        /*public void PrikaziUcenike()
         {
             if (Ucenici.Count == 0)
             {
@@ -53,6 +54,7 @@ namespace E_dnevnik
                 Console.WriteLine($"{ucenik.Ime} {ucenik.Prezime}");
             }
         }
+        */
     }
 
 }

@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Nedim Krupalija\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\Treca godina\\VVS\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
       "projectName": "E-dnevnik",
-      "projectPath": "C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
-      "packagesPath": "C:\\Users\\Nedim Krupalija\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\E-dnevnik\\obj\\",
+      "projectPath": "C:\\Users\\PC\\Desktop\\Treca godina\\VVS\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\Treca godina\\VVS\\E-dnevnik-VVS\\E-dnevnik\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Nedim Krupalija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

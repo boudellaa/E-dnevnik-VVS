@@ -11,10 +11,14 @@ namespace E_dnevnik
         public string Ime { get; set; }
         public List<Ucenik> Ucenici { get; set; }
 
+        public List<Predmet> Predmeti { get; set; }
+        
         public Razred(string ime)
         {
             Ime = ime;
             Ucenici = new List<Ucenik>();
+            Predmeti = new List<Predmet>();
+            
         }
 
         public void DodajUcenika(Ucenik ucenik)
@@ -23,17 +27,21 @@ namespace E_dnevnik
             Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
         }
 
-        public void PrikaziUcenike()
+        public void DodajPredmet(Predmet predmet)
         {
-            if (Ucenici.Count == 0)
-            {
-                throw new InvalidOperationException("U razredu nema učenika.");
-            }
-            Console.WriteLine($"Učenici u razredu {Ime}:");
-            foreach (var ucenik in Ucenici)
-            {
-                Console.WriteLine($"{ucenik.Ime} {ucenik.Prezime} ");
-            }
+            Predmeti.Add(predmet);
+            //Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
+        }
+
+        public void IzbaciUcenika(Ucenik ucenik)
+        {
+            Ucenici.Remove(ucenik);
+            Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} izbačen iz razreda {Ime}.");
+        }
+
+        public void IzbaciPredmet(Predmet predmet)
+        {
+            Predmeti.Remove(predmet);
         }
     }
 

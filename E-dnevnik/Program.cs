@@ -7,14 +7,21 @@ public class Program
     public static List<Predmet> predmeti;
     public static void Main()
     {
+        Razred razred1 = new Razred("II-4");
+        Razred razred2 = new Razred("III-2");
         ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", "123456"), new Ucenik("Nedim", "Krupalija", "neda", "12345") };
         nastavnici = new List<Nastavnik> { new Nastavnik("Berin", "Karahodžić", "bera", "12345"), new Nastavnik("Nedim", "Hošić", "hosa", "loslos") };
         predmeti = new List<Predmet>{
-            new Predmet("Matematika", ucenici, nastavnici[0]),
-            new Predmet("Fizika", new List<Ucenik>{ucenici[0]}, nastavnici[1])
+            new Predmet("Matematika", nastavnici[0]),
+            new Predmet("Fizika", nastavnici[1])
         };
-        Razred razred1 = new Razred("II-4");
-        Razred razred2 = new Razred("III-2");
+        razred1.Predmeti.AddRange(predmeti);
+        razred2.Predmeti.Add(predmeti[0]);
+        ucenici[0].Razred = razred1;
+        ucenici[1].Razred= razred2;
+        nastavnici[0].Predmeti.AddRange(predmeti);
+        nastavnici[1].Predmeti.Add(predmeti[0]);
+        
 
         razred1.DodajUcenika(ucenici[0]);
         razred2.DodajUcenika(ucenici[1]);
@@ -88,7 +95,7 @@ public class Program
             Console.Clear();
             Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime + "!");
             Console.WriteLine("Vaši predmeti: ");
-            List<Predmet> ucenikoviPredmeti = ucenik.DajMojePredmete(predmeti);
+            List<Predmet> ucenikoviPredmeti = ucenik.DajMojePredmete();
             for(int i = 0; i < ucenikoviPredmeti.Count; i++)
             {
                 Console.WriteLine(i + 1 + ". predmet: " + ucenikoviPredmeti[i].Ime);
@@ -155,9 +162,9 @@ public class Program
             Console.Clear();
             Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
             Console.WriteLine("Ovo su vaši predmeti: ");
-            for (int i = 0; i < predmeti.Count; i++)
+            for (int i = 0; i < nastavnik.Predmeti.Count; i++)
             {
-                Console.WriteLine(i + 1 + ". predmet: " + predmeti[i].Ime);
+                Console.WriteLine(i + 1 + ". predmet: " + nastavnik.Predmeti[i].Ime);
             }
         
                 if (predmeti.Count > 0)
@@ -185,9 +192,10 @@ public class Program
             Console.WriteLine("Dobrodošli nastavniče " + predmet.Nastavnik.Ime + " " + predmet.Nastavnik.Prezime);
             Console.WriteLine("Ovo je predmet " + predmet.Ime);
             Console.WriteLine("Ovo su učenici koji slušaju ovaju predmet: ");
-            for (int i = 0; i < predmet.Ucenici.Count; i++)
+            List<Ucenik> ucenici = predmet.DajSveUcenike();
+            for (int i = 0; i < ucenici.Count; i++)
             {
-                Console.WriteLine(i + 1 + ". ucenik: " + predmet.Ucenici[i].Ime + " " + predmet.Ucenici[i].Prezime);
+                Console.WriteLine(i + 1 + ". ucenik: " + ucenici[i].Ime + " " +ucenici[i].Prezime);
             }
             while (true)
             {
