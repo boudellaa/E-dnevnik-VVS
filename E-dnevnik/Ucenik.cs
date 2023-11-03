@@ -43,6 +43,15 @@ namespace E_dnevnik
             }
             Console.WriteLine($"Ocjene učenika {Ime} {Prezime}: {string.Join(", ", Ocjene)}");
         }
+        public List<Predmet> DajMojePredmete(List<Predmet> predmeti)
+        {
+            for(int i=0;i<predmeti.Count;i++)
+            {
+                if (!predmeti[i].Ucenici.Any(ucenik => ucenik.KorisnickoIme == KorisnickoIme))
+                    predmeti.Remove(predmeti[i]);
+            }
+            return predmeti;
+        }
     }
 
 }

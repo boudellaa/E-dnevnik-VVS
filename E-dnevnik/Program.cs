@@ -2,17 +2,17 @@
 
 public class Program
 {
+    public static List<Ucenik> ucenici;
+    public static List<Nastavnik> nastavnici;
+    public static List<Predmet> predmeti;
     public static void Main()
     {
-        List<Ucenik> ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", "123456"), new Ucenik("Nedim", "Krupalija", "neda", "12345") };
-        List<Nastavnik> nastavnici = new List<Nastavnik> { new Nastavnik("Berin", "Karahodžić", "bera", "12345"), new Nastavnik("Nedim", "Hošić", "hosa", "loslos") };
-        Predmet predmet1 = new Predmet("Matematika", nastavnici[0]);
-        Predmet predmet2 = new Predmet("Fizika", nastavnici[1]);
-
-        predmet1.DodajUcenika(ucenici[0]);
-        predmet1.DodajUcenika(ucenici[1]);
-        predmet2.DodajUcenika(ucenici[0]);
-
+        ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", "123456"), new Ucenik("Nedim", "Krupalija", "neda", "12345") };
+        nastavnici = new List<Nastavnik> { new Nastavnik("Berin", "Karahodžić", "bera", "12345"), new Nastavnik("Nedim", "Hošić", "hosa", "loslos") };
+        predmeti = new List<Predmet>{
+            new Predmet("Matematika", ucenici, nastavnici[0]),
+            new Predmet("Fizika", new List<Ucenik>{ucenici[0]}, nastavnici[1])
+        };
         Razred razred1 = new Razred("II-4");
         Razred razred2 = new Razred("III-2");
 
@@ -55,9 +55,6 @@ public class Program
                     prikaziUcenickiMeni(ucenik);
             }
         }
-
-
-     
     }
 
     private static void prikaziUcenickiMeni(Ucenik ucenik)
@@ -65,9 +62,11 @@ public class Program
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime);
+            Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime + "!");
             Console.WriteLine("Unesite: ");
             Console.WriteLine("1 za pregled vaših predmeta");
+            Console.WriteLine("2 za pregled prosjeka po predmetima");
+            Console.WriteLine("3 za pregled ukupnog prosjeka");
             Console.WriteLine("0 za povratak unazad");
             string opcija = Console.ReadLine();
             switch (opcija)
@@ -84,7 +83,42 @@ public class Program
 
     private static void prikaziUcenikovePredmete(Ucenik ucenik)
     {
-        throw new NotImplementedException();
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime + "!");
+            Console.WriteLine("Vaši predmeti: ");
+            List<Predmet> ucenikoviPredmeti = ucenik.DajMojePredmete(predmeti);
+            for(int i = 0; i < ucenikoviPredmeti.Count; i++)
+            {
+                Console.WriteLine(i + 1 + ". predmet: " + ucenikoviPredmeti[i].Ime);
+            }
+            Console.WriteLine("Unesite redni broj predmeta za prikaz ocjena ili 0 za nazad: ");
+            int broj = Convert.ToInt32(Console.ReadLine());
+            if (broj == 0) return;
+            if(broj <0 || broj > ucenikoviPredmeti.Count)
+            {
+                Console.WriteLine("Odabrali ste nepostojeci predmet!");
+                continue;
+            }
+            prikaziUcenikovPredmet(ucenik,ucenikoviPredmeti[broj-1]);
+        }
+    }
+
+    private static void prikaziUcenikovPredmet(Ucenik ucenik,Predmet predmet)
+    {
+        Console.Clear();
+        Console.WriteLine(ucenik.Ime + " " + ucenik.Prezime + ", dobrodošli na predmet " + predmet.Ime + "!");
+        Console.WriteLine("Nastavnik: " + predmet.Nastavnik.Ime + " " + predmet.Nastavnik.Prezime);
+        Console.WriteLine("Vaše ocjene: ");
+        Console.WriteLine("Vaš prosjek: ");
+        Console.WriteLine("Unesi 0 za povratak nazad");
+        while (true)
+        {
+            string opcija = Console.ReadLine();
+            if (opcija.Equals("0")) return;
+            else Console.WriteLine("Neispravan unos!");
+        }  
     }
 
     private static void prikaziNastavnickiMeni(Nastavnik nastavnik)
@@ -115,7 +149,10 @@ public class Program
 
     private static void prikaziNastavnikovePredmete(Nastavnik nastavnik)
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
+        
+
     }
 
     private static void prikaziNastavnikoveRazrede(Nastavnik nastavnik)
