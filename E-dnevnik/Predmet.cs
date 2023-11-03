@@ -17,7 +17,14 @@ namespace E_dnevnik
             Ime = ime;
             Ucenici = new List<Ucenik>();
             Nastavnik = nastavnik;
+         }
+        public Predmet(string ime, List<Ucenik> ucenici,Nastavnik nastavnik)
+        {
+            Ime = ime;
+            Ucenici = ucenici;
+            Nastavnik = nastavnik;
         }
+
 
         public void DodajUcenika(Ucenik ucenik)
         {
