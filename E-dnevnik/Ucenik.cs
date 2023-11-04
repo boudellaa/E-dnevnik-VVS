@@ -17,9 +17,9 @@ namespace E_dnevnik
 
         public string Sifra { get; set; }
 
-        public List<Ocjena> Ocjene { get; set; }
+        public List<Ocjena> Ocjene { get; set; } = new();
 
-        public List<Komentar> Komentari { get; set; }
+        public List<Komentar> Komentari { get; set; } = new();
 
         public Razred Razred { get; set; }
 
@@ -32,7 +32,7 @@ namespace E_dnevnik
             KorisnickoIme = korisnickoIme;
             Sifra = sifra;
             Ocjene = new List<Ocjena>();
-            Komentari = new List<Komentar>();
+            
         }
         public Ucenik(string ime, string prezime, string korisnickoIme, string sifra, Razred razred)
         {

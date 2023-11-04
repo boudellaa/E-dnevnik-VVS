@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -19,10 +21,7 @@ namespace E_dnevnik
 
         public List<Predmet> Predmeti { get; set; }
 
-
-        public Razred_Predmet Razred_Predmet { get; set; }
-
-
+        
         public E_Dnevnik()
         {
 
@@ -30,25 +29,146 @@ namespace E_dnevnik
 
 			Razredi = new List<Razred>
 		{
-			new Razred("II-4"),
-			new Razred("III-2")
+			new Razred("I-1"),
+			new Razred("I-2"),
+			new Razred("I-3"),
+			new Razred("I-4"),
+			new Razred("I-5"),
+			new Razred("I-6"),
 		 };
 
-			Ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", "123456"), new Ucenik("Nedim", "Krupalija", "neda", "12345") };
-			Nastavnici = new List<Nastavnik> { new Nastavnik("Berin", "Karahodžić", "bera", "12345"), new Nastavnik("Nedim", "Hošić", "hosa", "loslos") };
+			Ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", "123456"),
+			new Ucenik("Nedim", "Krupalija", "neda", "12345") ,
+			new Ucenik("John", "Doe", "john", "12345"),
+
+			new Ucenik("Vitoria","Lilllie","Jenna","8419"),
+
+			new Ucenik("Xylina","Zora","Michaelina","7058"),
+
+			new Ucenik("Florinda","Kipp","Antonina","6057"),
+
+			new Ucenik("Didi","Aindrea","Sybila","5706"),
+
+			new Ucenik("Nathalie","Corina","Eilis","1288"),
+
+			new Ucenik("Betteann","Bird","Margalit","7202"),
+
+			new Ucenik("Clarinda","Edith","Lanny","8575"),
+
+			new Ucenik("Fawne","Britteny","Stacee","4350"),
+
+			new Ucenik("Jada","Catlaina","Yovonnda","6523"),
+
+			new Ucenik("Amity","Randi","Lenora","4510"),
+
+			new Ucenik("Kayley","Meredithe","Concettina","2887"),
+
+			new Ucenik("Luelle","Rosie","Godiva","8832"),
+
+			new Ucenik("Emmaline","Zena","Deedee","2726"),
+
+			new Ucenik("Audre","Odetta","Frank","274"),
+
+			new Ucenik("Mariann","Giulia","Allyn","6965"),
+
+			new Ucenik("Clarette","Colline","Rae","8886"),
+
+			new Ucenik("Henrieta","Suzette","Nady","328"),
+
+			new Ucenik("Kathleen","Rozanna","Ki","891"),
+
+			new Ucenik("Andy","Constantine","Tildy","3189"),
+
+			new Ucenik("Klarika","Sileas","Bernetta","5089"),
+
+			new Ucenik("Juditha","Laure","Fifine","7055"),
+
+			new Ucenik("Cybil","Lilith","Pearla","2816"),
+
+			new Ucenik("Ines","Jazmin","Fifine","2634"),
+
+			new Ucenik("Mariele","Kyrstin","Shena","9563"),
+
+			new Ucenik("Tommy","Robinette","Odille","4401"),
+
+			new Ucenik("Andi","Brooke","Merilee","2423"),
+
+			new Ucenik("Abigael","Pen","Shelly","1057"),
+
+			new Ucenik("Moyna","Kellia","Melesa","1547"),
+
+			new Ucenik("Wendeline","Allix","Lethia","1010"),
+
+			new Ucenik("Dion","Lindy","Rora","5244")
+
+
+
+			};
+			Nastavnici = new List<Nastavnik> { 
+				new Nastavnik("Berin", "Karahodžić", "bera", "12345"), 
+				new Nastavnik("Nedim", "Hošić", "hosa", "loslos") ,
+				new Nastavnik("Ali", "Boudellaa", "buda", "12345"),
+				new Nastavnik("Mujo", "Mujic", "mujo", "12345"),
+				new Nastavnik("Haso", "Hasic", "haso", "12345"),
+				new Nastavnik("Buba", "Corelli", "kora", "12345"),
+				new Nastavnik("Halid", "Beslic", "halid", "12345")
+
+			};
 			Predmeti = new List<Predmet>{
-			new Predmet("Matematika", Nastavnici[0]),
-			new Predmet("Fizika", Nastavnici[1])
+			new Predmet("Matematika"),
+			new Predmet("Fizika"),
+			new Predmet("Programiranje"),
+			new Predmet("Osnove eleketrotehnike"),
+			new Predmet("Verifikacija i validacija softvera"),
+			new Predmet("Bosanski jezik"),
+			new Predmet("Engleski jezik")
 		};
 
-			new Razred_Predmet(Razredi[0], Predmeti[0]);
+			for(int i=0;i<Nastavnici.Count;i++)
+			{
+				SpojiNastavnikPredmet(Nastavnici[i], Predmeti[i]);
+			}
+			var random = new Random();
 
-			Razredi[0].DodajUcenika(Ucenici[0]);
-			Razredi[1].DodajUcenika(Ucenici[1]);
+			for(int i=0;i<Ucenici.Count;i++)
+			{
+				DodajUcenikaURazred(Ucenici[i], Razredi[random.Next(6)]);
+			}
+
+			for(int i=0;i<Razredi.Count;i++)
+			{
+				for(int j=0;Razredi[i].Razredi_Predmeti.Count<3;j++)
+				{
+					var tempPredmet = Predmeti[random.Next(Predmeti.Count)];
+					if (Razredi[i].Razredi_Predmeti.Any(p => p.Predmet.Ime == tempPredmet.Ime)) continue;
+					SpojiRazredIPredmet(Razredi[i], Predmeti[random.Next(Predmeti.Count)]);
+				}
+				
+			}
+
+
 
 
 		}
 
+		public void SpojiRazredIPredmet(Razred razred, Predmet predmet)
+		{
+			var razred_predmet = new Razred_Predmet(razred, predmet);
+			razred.Razredi_Predmeti.Add(razred_predmet);
+			predmet.Razredi_Predmeti.Add(razred_predmet);
+		}
+
+		public void SpojiNastavnikPredmet(Nastavnik nastavnik, Predmet predmet)
+		{
+			nastavnik.Predmet = predmet;
+			predmet.Nastavnik = nastavnik;
+		}
+
+		public void DodajUcenikaURazred(Ucenik ucenik, Razred razred)
+		{
+			ucenik.Razred = razred;
+			razred.Ucenici.Add(ucenik);
+		}
 
 		public void DodajRazred(Razred razred)
         {

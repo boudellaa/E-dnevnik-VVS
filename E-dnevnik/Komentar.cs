@@ -26,9 +26,7 @@ namespace E_dnevnik
 		public Komentar()
 		{
 			
-		}
-
-		
+		}	
 
 	}
 }
