@@ -12,19 +12,21 @@ namespace E_dnevnik
        
         public Nastavnik Nastavnik { get; set; }
 
-        public List<Razred_Predmet> Razredi_Predmeti { get; set; }
+        public List<Razred_Predmet> Razredi_Predmeti { get; set; } = new();
 
         
 
-        public Predmet(string ime, Nastavnik nastavnik)
+        public Predmet(string ime)
         {
             Ime = ime;
             
-            Nastavnik = nastavnik;
-            
-            
         }
-       
+
+        public void DodijeliNastavnika(Nastavnik nastavnik)
+        {
+            Nastavnik = nastavnik;
+            nastavnik.Predmet = this;
+        }
 
         //public void DodajRazred(Razred razred)
         //{

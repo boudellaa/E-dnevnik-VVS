@@ -10,45 +10,60 @@ public class Program
 
 		var EDnevnik = new E_Dnevnik();
 
-        
 
-        //pocetak aplikacije 
+        foreach(var x in EDnevnik.Razredi)
+		{
 
-        string korisnickoIme ="";
-        string sifra = "";
-        while (true)
-        {
-            Console.Clear();
-            do
-            {
-                Console.WriteLine("Unesite korisničko ime: ");
-                korisnickoIme = Console.ReadLine();
-            } while (korisnickoIme.Length == 0);
+			foreach (var y in x.Razredi_Predmeti)
+			{
+				Console.WriteLine(y.Razred.Ime + " " + y.Predmet.Ime + " Nastavnik: " + y.Predmet.Nastavnik.Ime);
 
-            do
-            {
-                Console.WriteLine("Unesite Šifru: ");
-                sifra = Console.ReadLine();
-            } while (sifra.Length == 0);
-
-            Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == korisnickoIme && nastavnik.Sifra == sifra);
-            if (nastavnik != null)
-                EDnevnik.PrikaziNastavnickiMeni(nastavnik);
-            else
-            {
-                Ucenik? ucenik = EDnevnik.Ucenici.SingleOrDefault(ucenik => ucenik.KorisnickoIme == korisnickoIme && ucenik.Sifra == sifra);
-                if (ucenik != null)
-                    EDnevnik.PrikaziUcenickiMeni(ucenik);
-            }
-        }
-    }
-
-   
-
-   
-
-    
+			}
 
 
-   
+			
+			
+			
+		}
+
+
+		//pocetak aplikacije 
+
+		/* string korisnickoIme ="";
+		 string sifra = "";
+		 while (true)
+		 {
+			 Console.Clear();
+			 do
+			 {
+				 Console.WriteLine("Unesite korisničko ime: ");
+				 korisnickoIme = Console.ReadLine();
+			 } while (korisnickoIme.Length == 0);
+
+			 do
+			 {
+				 Console.WriteLine("Unesite Šifru: ");
+				 sifra = Console.ReadLine();
+			 } while (sifra.Length == 0);
+
+			 Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == korisnickoIme && nastavnik.Sifra == sifra);
+			 if (nastavnik != null)
+				 EDnevnik.PrikaziNastavnickiMeni(nastavnik);
+			 else
+			 {
+				 Ucenik? ucenik = EDnevnik.Ucenici.SingleOrDefault(ucenik => ucenik.KorisnickoIme == korisnickoIme && ucenik.Sifra == sifra);
+				 if (ucenik != null)
+					 EDnevnik.PrikaziUcenickiMeni(ucenik);
+			 }
+		 }*/
+	}
+
+
+
+
+
+
+
+
+
 }
