@@ -28,11 +28,48 @@ namespace E_dnevnik
             nastavnik.Predmet = this;
         }
 
+        public Double DajProsjekPredemta()
+        {
+            Double temp = 0;
+            double brojac = 0;
+            foreach(var x in Razredi_Predmeti)
+            {
+                if(x.Predmet.Ime == this.Ime)
+                {
+                    foreach(var ucenik in x.Razred.Ucenici)
+                    {
+                        
+                        temp = ucenik.DajProsjekUcenikaNaPredmetu(this);
+                        if (Convert.ToInt32(temp) != 0) brojac++;
+                    }
+                }
+            }
+            if (brojac != 0) return temp / brojac;
+            return 0;
+        }
+
+
+        public List<Ucenik> DajSveUcenikeNaPredmetu()
+        {
+            var temp = new List<Ucenik>();
+            foreach (var x in Razredi_Predmeti)
+            {
+                if(x.Predmet.Ime == Ime)
+                {
+                    temp.AddRange(x.Razred.Ucenici);
+                }
+            }
+            return temp;
+        }
+
         //public void DodajRazred(Razred razred)
         //{
         //    Razredi.Add(razred);
         //    Console.WriteLine($"Razred {razred.Ime} dodan na predmet {Ime}.");
         //}
+
+
+
 
         //public List<Ucenik> DajSveUcenike()
         //{

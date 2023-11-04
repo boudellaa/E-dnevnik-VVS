@@ -21,30 +21,35 @@ namespace E_dnevnik
    
         }
 
+        public Double DajProsjekRazreda()
+        {
+            Double temp = 0;
+            int brojac = 0;
+            foreach(var x in Ucenici)
+            {
+                foreach(var ocjena in x.Ocjene)
+                {
+                    if (ocjena.Vrijednost != 0)
+                    {
+						temp += ocjena.Vrijednost;
+                        brojac++;
+					}
+
+                }
+            }
+            if (brojac == 0) throw new Exception("Razred nema ocjena!"); 
+            return temp/brojac;
+        }
+
         public void DodajUcenika(Ucenik ucenik)
         {
+
+			ucenik.Razred = this;
+			Ucenici.Add(ucenik);
             
-            Ucenici.Add(ucenik);
-
-            Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
+            
         }
-
-        //public void DodajPredmet(Predmet predmet)
-        //{
-        //    Predmeti.Add(predmet);
-        //    //Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} dodan u razred {Ime}.");
-        //}
-
-        public void IzbaciUcenika(Ucenik ucenik)
-        {
-            Ucenici.Remove(ucenik);
-            Console.WriteLine($"Učenik {ucenik.Ime} {ucenik.Prezime} izbačen iz razreda {Ime}.");
-        }
-
-        //public void IzbaciPredmet(Predmet predmet)
-        //{
-        //    Predmeti.Remove(predmet);
-        //}
+        
     }
 
 

@@ -45,24 +45,34 @@ namespace E_dnevnik
             Razred = razred;
         }
 
-        public void DodajOcjenu(Ocjena ocjena)
+        public Double DajProsjekUcenikaNaPredmetu(Predmet predmet)
         {
-            if (ocjena.Vrijednost < 1 || ocjena.Vrijednost > 5)
+            Double temp = 0;
+            int brojOcjena = 0;
+            foreach(var ocjena in Ocjene)
             {
-                throw new ArgumentOutOfRangeException("Ocjena mora biti između 1 i 5.");
+                if(ocjena.Predmet.Ime == predmet.Ime)
+                {
+                    temp += ocjena.Vrijednost;
+                    brojOcjena++;
+                }
             }
-            Ocjene.Add(ocjena);
-            Console.WriteLine($"Ocjena {ocjena} dodana učeniku {Ime} {Prezime}.");
+            if (brojOcjena > 0) return temp / brojOcjena;
+            return 0;
         }
 
-        public void PrikaziOcjene()
+
+        public Double DajUkupanProsjekUcenika()
         {
-            if (Ocjene.Count == 0)
-            {
-                throw new InvalidOperationException("Učenik nema ocjena.");
-            }
-            Console.WriteLine($"Ocjene učenika {Ime} {Prezime}: {string.Join(", ", Ocjene)}");
+            Double temp = 0;
+            foreach (var ocjena in Ocjene)
+                temp += ocjena.Vrijednost;
+            if(Ocjene.Count>0)
+            return temp / Ocjene.Count;
+            return 0;
         }
+
+
         public List<Predmet> DajMojePredmete()
         {
             var temp = new List<Predmet>();

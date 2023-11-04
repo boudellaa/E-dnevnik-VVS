@@ -132,23 +132,25 @@ namespace E_dnevnik
 
 			for(int i=0;i<Ucenici.Count;i++)
 			{
-				DodajUcenikaURazred(Ucenici[i], Razredi[random.Next(6)]);
+				DodajUcenikaURazred(Ucenici[i], Razredi[random.Next(Razredi.Count-1)]);
+				
 			}
 
 			for(int i=0;i<Razredi.Count;i++)
 			{
 				for(int j=0;Razredi[i].Razredi_Predmeti.Count<3;j++)
 				{
-					var tempPredmet = Predmeti[random.Next(Predmeti.Count)];
+					int brojac = random.Next(Predmeti.Count-1);
+					var tempPredmet = Predmeti[brojac];
 					if (Razredi[i].Razredi_Predmeti.Any(p => p.Predmet.Ime == tempPredmet.Ime)) continue;
-					SpojiRazredIPredmet(Razredi[i], Predmeti[random.Next(Predmeti.Count)]);
+					SpojiRazredIPredmet(Razredi[i], Predmeti[brojac]);
 				}
 				
 			}
 
 
 
-
+			 
 		}
 
 		public void SpojiRazredIPredmet(Razred razred, Predmet predmet)
@@ -169,7 +171,7 @@ namespace E_dnevnik
 			ucenik.Razred = razred;
 			razred.Ucenici.Add(ucenik);
 		}
-
+		
 		public void DodajRazred(Razred razred)
         {
             Razredi.Add(razred);
@@ -222,8 +224,8 @@ namespace E_dnevnik
 				Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime + "!" + " Vi pripadate razredu " + ucenik.Razred.Ime);
 				Console.WriteLine("Unesite: ");
 				Console.WriteLine("1 za pregled vaših predmeta");
-				Console.WriteLine("2 za pregled prosjeka po predmetima");
-				Console.WriteLine("3 za pregled ukupnog prosjeka");
+				Console.WriteLine("2 za pregled ukupnog prosjeka");
+				Console.WriteLine("3 za pregled vasih komentara");
 				Console.WriteLine("0 za povratak unazad");
 				string opcija = Console.ReadLine();
 				switch (opcija)
@@ -233,7 +235,60 @@ namespace E_dnevnik
 					case "1":
 						PrikaziUcenikovePredmete(ucenik);
 						break;
+					case "2":
+						PrikaziProsjekUcenika(ucenik);
+						break;
+					case "3":
+						PrikaziKomentareUcenika(ucenik);
+						break;
+				}
+			}
+		}
 
+
+		public void PrikaziKomentareUcenika(Ucenik ucenik)
+		{
+			while (true)
+			{
+				Console.Clear();
+				Console.WriteLine("Ovdje se nalaze svi vaši komentari: ");
+				int i = 0;
+				foreach(var komentar in ucenik.Komentari)
+				{
+					Console.WriteLine(i+1 + ". Komentar napisao: " + komentar.Nastavnik.Ime);
+					Console.WriteLine("Opis komentara: " + komentar.Opis);
+				}
+
+				try
+				{
+					int broj = Convert.ToInt32(Console.ReadLine());
+					if (broj == 0) return;
+					Console.WriteLine("Unesite 0 za povratak nazad");
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+					continue;
+				}
+			}
+		}
+
+		public void PrikaziProsjekUcenika(Ucenik ucenik)
+		{
+			while(true)
+			{
+				Console.Clear();
+				Console.WriteLine("Vaš trenutni prosjek je: " + ucenik.DajUkupanProsjekUcenika());
+				try
+				{
+					int broj = Convert.ToInt32(Console.ReadLine());
+					if (broj == 0) return;
+					Console.WriteLine("Unesite 0 za povratak nazad");
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+					continue;
 				}
 			}
 		}
@@ -286,7 +341,7 @@ namespace E_dnevnik
 				Console.Clear();
 				Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
 				Console.WriteLine("Unesite: ");
-				Console.WriteLine("1 za pregled predmeta koje predajete");
+				Console.WriteLine("1 za pregled predmeta koji predajete");
 				Console.WriteLine("2 za pregled razreda kojima predajete");
 				Console.WriteLine("0 za povratak unazad");
 				string opcija = Console.ReadLine();
@@ -312,7 +367,7 @@ namespace E_dnevnik
 			{
 				Console.Clear();
 				Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
-				Console.WriteLine("Ovo je vaš predmeti: ");
+				Console.WriteLine("Ovo je vaš predmet: ");
 				
 				Console.WriteLine(nastavnik.Predmet.Ime);
 

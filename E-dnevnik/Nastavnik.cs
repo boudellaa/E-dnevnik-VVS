@@ -32,10 +32,22 @@ namespace E_dnevnik
             
             KorisnickoIme = korisnickoIme;
             Sifra = sifra;
+			
 
         }
 
+		public void UpisiOcjenu(Ucenik ucenik, int vrijednost)
+		{
+			if (vrijednost < 1 || vrijednost > 5) throw new Exception("Ocjena mora biti u opsegu 1 do 5!");
+			ucenik.Ocjene.Add(new Ocjena(vrijednost, ucenik, Predmet, DateTime.Now));
+		}
 
+
+		public void NoviKomentar(Ucenik ucenik, string opis)
+		{
+			if (opis == null) return;
+			ucenik.Komentari.Add(new Komentar(this, ucenik, opis));
+		}
 
         /*
 		public IEnumerable<Ucenik> DajSvojeUcenike()
@@ -83,14 +95,7 @@ namespace E_dnevnik
             
         }
 		
-        public Komentar UnesiKomentar(String opis, Ucenik ucenik)
-        {
-            if (opis == null)
-            {
-                throw new Exception("Komentar ne može biti prazan!");
-            }
-            return new Komentar(this, ucenik, opis);
-        }
+       
 		*/
     }
 
