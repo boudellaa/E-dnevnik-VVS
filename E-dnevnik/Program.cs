@@ -11,25 +11,11 @@ public class Program
 		var EDnevnik = new E_Dnevnik();
 
 
-        foreach(var x in EDnevnik.Razredi)
-		{
-
-			foreach (var y in x.Razredi_Predmeti)
-			{
-				Console.WriteLine(y.Razred.Ime + " " + y.Predmet.Ime + " Nastavnik: " + y.Predmet.Nastavnik.Ime);
-
-			}
-
-
-			
-			
-			
-		}
-
+      
 
 		//pocetak aplikacije 
 
-		/* string korisnickoIme ="";
+		 string korisnickoIme ="";
 		 string sifra = "";
 		 while (true)
 		 {
@@ -55,7 +41,7 @@ public class Program
 				 if (ucenik != null)
 					 EDnevnik.PrikaziUcenickiMeni(ucenik);
 			 }
-		 }*/
+		 }
 	}
 
 

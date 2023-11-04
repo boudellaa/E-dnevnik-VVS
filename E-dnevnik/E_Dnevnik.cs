@@ -219,7 +219,7 @@ namespace E_dnevnik
 			while (true)
 			{
 				Console.Clear();
-				Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime + "!");
+				Console.WriteLine("Dobrodošli " + ucenik.Ime + " " + ucenik.Prezime + "!" + " Vi pripadate razredu " + ucenik.Razred.Ime);
 				Console.WriteLine("Unesite: ");
 				Console.WriteLine("1 za pregled vaših predmeta");
 				Console.WriteLine("2 za pregled prosjeka po predmetima");
