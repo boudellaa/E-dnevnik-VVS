@@ -422,8 +422,8 @@ namespace E_dnevnik
         {
 			while (true)
 			{
-				Console.Clear();
-				Console.WriteLine("Izabrali ste razred: " + razred.Ime);
+                Console.Clear();
+                Console.WriteLine("Izabrali ste razred: " + razred.Ime);
 				Console.WriteLine("1 za prosjek razreda");
 				Console.WriteLine("2 za pregled svih učenika u razreda");
 				Console.WriteLine("0 za povratak unazad");
@@ -435,44 +435,55 @@ namespace E_dnevnik
 						return;
 					case "1":
 						Console.WriteLine("Prosjek razreda " + razred.Ime + " je: " + razred.DajProsjekRazreda());
+						Console.WriteLine("Upisite bilo sta kao znak da ste primili informaciju");
+						Console.ReadLine();
 						break;
 					case "2":
-						List<Ucenik> ucenici = razred.DajSveUcenike();
-						for (int i = 0; i < ucenici.Count; i++)
-						{
-							Console.WriteLine(i + 1 + ". " + ucenici[i].Ime + " " + ucenici[i].Prezime);
-						}
-						int broj;
-						while (true)
-						{
-							Console.WriteLine("Unesite broj pored ucenika da izaberete zeljenog ucenika ili 0 za nazad: ");
-							broj = Convert.ToInt32(Console.ReadLine());
-							if (broj == 0) return;
-							if (broj < 0 || broj > ucenici.Count)
-								Console.WriteLine("Pogresan unos!");
-							else break;
-						}
-						prikaziUcenika(ucenici[broj - 1], nastavnik);
-						break;
+						prikaziUcenikeRazreda(razred, nastavnik);
+                        
+                        break;
 
 				}
 			}
         }
 
-        
+        public static void prikaziUcenikeRazreda(Razred razred, Nastavnik nastavnik)
+		{
+			while (true)
+			{
+				Console.Clear();
+				Console.WriteLine("Ovo su svi učenici razreda " + razred.Ime);
+                List<Ucenik> ucenici = razred.DajSveUcenike();
+                for (int i = 0; i < ucenici.Count; i++)
+                {
+                    Console.WriteLine(i + 1 + ". " + ucenici[i].Ime + " " + ucenici[i].Prezime);
+                }
+                int broj;
+                while (true)
+                {
+                    Console.WriteLine("Unesite broj pored ucenika da izaberete zeljenog ucenika ili 0 za nazad: ");
+                    broj = Convert.ToInt32(Console.ReadLine()); //kad se ne unese nista krahira
+                    if (broj == 0) return;
+                    if (broj < 0 || broj > ucenici.Count)
+                        Console.WriteLine("Pogresan unos!");
+                    else break;
+                }
+                prikaziUcenika(ucenici[broj - 1], nastavnik);
+            }
+		}
         private static void prikaziUcenika(Ucenik ucenik, Nastavnik nastavnik)
         {
 			Console.Clear();
 			Console.WriteLine("Ovo je ucenik " + ucenik.Ime + " " + ucenik.Prezime);
-			Console.WriteLine("Trenutno je clan razreda" + ucenik.Razred);
-			Console.WriteLine("Ovo su njegove ocijene iz Vašeg predmeta: ");
+			Console.WriteLine("Trenutno je ucenik razreda " + ucenik.Razred.Ime);
+			Console.WriteLine("Ovo su njegove ocjene iz Vašeg predmeta: ");
 			foreach(Ocjena ocjena in ucenik.DajOcjeneIzPredmeta(nastavnik.Predmet))
 			{
 				Console.WriteLine(ocjena.Vrijednost + " na datum " + ocjena.Datum);
             }
-            Console.WriteLine("Unesi 0 za povratak nazad");
             while (true)
             {
+                Console.WriteLine("Unesi 0 za povratak nazad");
                 string opcija = Console.ReadLine();
                 if (opcija.Equals("0")) return;
                 else Console.WriteLine("Neispravan unos!");
