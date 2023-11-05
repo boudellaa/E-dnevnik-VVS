@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace E_dnevnik
 {
-    public class Ocjena
+    public class Ocjena 
     {
         public int Vrijednost { get; set; }
 
@@ -27,5 +27,7 @@ namespace E_dnevnik
 			Predmet = predmet;
 			Datum = datum;
 		}
-	 }
+
+		
+	}
 }

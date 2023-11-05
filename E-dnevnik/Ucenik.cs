@@ -45,6 +45,11 @@ namespace E_dnevnik
             Razred = razred;
         }
 
+        public List<Ocjena> DajSortiraneOcjenePoVrijednosti(List<Ocjena> ocjene)
+        {
+            return (List<Ocjena>)ocjene.OrderBy(p => p.Vrijednost).ToList();
+        }
+
         public Double DajProsjekUcenikaNaPredmetu(Predmet predmet)
         {
             Double temp = 0;

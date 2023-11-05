@@ -351,18 +351,56 @@ namespace E_dnevnik
 
 		public void PrikaziUcenikovPredmet(Ucenik ucenik, Predmet predmet)
 		{
-			Console.Clear();
-			Console.WriteLine(ucenik.Ime + " " + ucenik.Prezime + ", dobrodošli na predmet " + predmet.Ime + "!");
-			Console.WriteLine("Nastavnik: " + predmet.Nastavnik.Ime + " " + predmet.Nastavnik.Prezime);
-			Console.WriteLine("Vaše ocjene: ");
-			Console.WriteLine("Vaš prosjek: ");
-			Console.WriteLine("Unesi 0 za povratak nazad");
+			
 			while (true)
 			{
+				Console.Clear();
+				Console.WriteLine(ucenik.Ime + " " + ucenik.Prezime + ", dobrodošli na predmet " + predmet.Ime + "!");
+				Console.WriteLine("Nastavnik: " + predmet.Nastavnik.Ime + " " + predmet.Nastavnik.Prezime);
+				Console.WriteLine("Vaše ocjene: ");
+				foreach (var ocjena in ucenik.DajOcjeneIzPredmeta(predmet))
+					Console.WriteLine(ocjena.Vrijednost + ", datum: " + ocjena.Datum.ToShortDateString());
+				Console.WriteLine("Vaš prosjek: " + ucenik.DajProsjekUcenikaNaPredmetu(predmet));
+
+				Console.WriteLine("1. sortiranje ocjena po vrijednosti");
+				Console.WriteLine("0. povratak nazad");
+
 				string opcija = Console.ReadLine();
-				if (opcija.Equals("0")) return;
-				else Console.WriteLine("Neispravan unos!");
+				switch (opcija)
+				{
+					case "0":
+						return;
+					case "1":
+						while (true)
+						{
+							Console.Clear();
+							Console.WriteLine("Vase ocjena sortirane po vrijednosti glase: ");
+							foreach (var ocjena in ucenik.DajSortiraneOcjenePoVrijednosti(ucenik.DajOcjeneIzPredmeta(predmet)))
+								Console.WriteLine(ocjena.Vrijednost + ", datum: " + ocjena.Datum.ToShortDateString());
+							Console.WriteLine("0. nazad");
+							if (Console.ReadLine() == "0") return;
+						}
+						break;
+
+					default:
+						Console.WriteLine("Neispravan unos!");
+						break;
+				}
+				
+					
 			}
+		}
+
+		private static void PrikaziSortiraneOcjene(Ucenik ucenik, Predmet predmet)
+		{
+			Console.Clear();
+			Console.WriteLine("Vase ocjena sortirane po vrijednosti glase: ");
+			foreach(var ocjena in ucenik.DajSortiraneOcjenePoVrijednosti(ucenik.DajOcjeneIzPredmeta(predmet)))
+				Console.WriteLine(ocjena.Vrijednost + ", datum: " + ocjena.Datum.ToShortDateString());
+
+			Console.WriteLine("0. za nazad");
+
+
 		}
 
 		public void PrikaziNastavnickiMeni(Nastavnik nastavnik)
@@ -373,6 +411,7 @@ namespace E_dnevnik
 				Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime + ", predmet koji predajete je " + nastavnik.Predmet.Ime + ".");
 				Console.WriteLine("Unesite: ");
 				Console.WriteLine("1 za pregled razreda kojima predajete");
+				Console.WriteLine("2 za pretragu ucenika po imenu");
 				Console.WriteLine("0 za povratak unazad");
 				string opcija = Console.ReadLine();
 				switch (opcija)
@@ -382,8 +421,27 @@ namespace E_dnevnik
 					case "1":
 						PrikaziNastavnikoveRazrede(nastavnik);
 						break;
+					case "2":
+						PretragaUcenika(nastavnik);
+						break;
+					default:
+						Console.WriteLine("Pogresan unos!");
+						break;
 				}
 			}
+
+		}
+
+		private static void PretragaUcenika(Nastavnik nastavnik)
+		{
+			Console.Clear();
+			Console.WriteLine("Unesite ime ucenika za pretragu: ");
+			string ime = Console.ReadLine();
+			Console.WriteLine("Unesite prezime ucenika za pretragu: ");
+			string prezime = Console.ReadLine();
+
+			Ucenik ucenik = nastavnik.Predmet.DajSveUcenikeNaPredmetu().Where(p => p.Ime.Contains(ime) && p.Prezime.Contains(prezime)).First();
+			PrikaziUcenika(ucenik, nastavnik);
 
 		}
 
@@ -406,13 +464,16 @@ namespace E_dnevnik
                         Console.WriteLine(i + 1 + ". " + nastavnikoviRazredi[i].Ime);
                     }
                 }
+				Console.WriteLine("0 za povratak nazad");
                 int broj;
                 while (true)
                 {
-                    Console.WriteLine("Unesite broj pored razreda da izaberete zeljeni razred: ");
+                    Console.WriteLine("Unesite broj pored razreda da izaberete zeljeni razred ili 0 za nazad: ");
                     broj = Convert.ToInt32(Console.ReadLine());
-                    if (broj <= 0 || broj > nastavnikoviRazredi.Count)
+					if (broj == 0) return;
+                    if (broj < 0 || broj > nastavnikoviRazredi.Count)
                         Console.WriteLine("Pogresan unos!");
+					
                     else break;
                 }
                 PrikaziNastavnikovRazred(nastavnikoviRazredi[broj - 1], nastavnik);
@@ -434,50 +495,151 @@ namespace E_dnevnik
 					case "0":
 						return;
 					case "1":
-						Console.WriteLine("Prosjek razreda " + razred.Ime + " je: " + razred.DajProsjekRazreda());
+						PrikaziProsjekRazreda(razred);
 						break;
 					case "2":
-						List<Ucenik> ucenici = razred.DajSveUcenike();
-						for (int i = 0; i < ucenici.Count; i++)
-						{
-							Console.WriteLine(i + 1 + ". " + ucenici[i].Ime + " " + ucenici[i].Prezime);
-						}
-						int broj;
-						while (true)
-						{
-							Console.WriteLine("Unesite broj pored ucenika da izaberete zeljenog ucenika ili 0 za nazad: ");
-							broj = Convert.ToInt32(Console.ReadLine());
-							if (broj == 0) return;
-							if (broj < 0 || broj > ucenici.Count)
-								Console.WriteLine("Pogresan unos!");
-							else break;
-						}
-						prikaziUcenika(ucenici[broj - 1], nastavnik);
+
+						PrikaziUcenikeRazreda(razred, nastavnik);
 						break;
 
 				}
 			}
         }
 
-        
-        private static void prikaziUcenika(Ucenik ucenik, Nastavnik nastavnik)
-        {
-			Console.Clear();
-			Console.WriteLine("Ovo je ucenik " + ucenik.Ime + " " + ucenik.Prezime);
-			Console.WriteLine("Trenutno je clan razreda" + ucenik.Razred);
-			Console.WriteLine("Ovo su njegove ocijene iz Vašeg predmeta: ");
-			foreach(Ocjena ocjena in ucenik.DajOcjeneIzPredmeta(nastavnik.Predmet))
+
+		private static void PrikaziUcenikeRazreda(Razred razred, Nastavnik nastavnik)
+		{
+			List<Ucenik> ucenici = new();
+			try
 			{
-				Console.WriteLine(ocjena.Vrijednost + " na datum " + ocjena.Datum);
-            }
-            Console.WriteLine("Unesi 0 za povratak nazad");
-            while (true)
-            {
+				ucenici = razred.DajSveUcenike();
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Razred nema ucenika!");
+			}
+
+			for (int i = 0; i < ucenici.Count; i++)
+			{
+				Console.WriteLine(i + 1 + ". " + ucenici[i].Ime + " " + ucenici[i].Prezime);
+			}
+			int broj;
+			while (true)
+			{
+				Console.WriteLine("Unesite broj pored ucenika da izaberete zeljenog ucenika ili 0 za nazad: ");
+				broj = Convert.ToInt32(Console.ReadLine());
+				if (broj == 0) return;
+				if (broj < 0 || broj > ucenici.Count)
+					Console.WriteLine("Pogresan unos!");
+				else break;
+			}
+			PrikaziUcenika(ucenici[broj - 1], nastavnik);
+		}
+        
+        private static void PrikaziUcenika(Ucenik ucenik, Nastavnik nastavnik)
+        {
+			
+
+			while (true)
+			{
+				Console.Clear();
+				Console.WriteLine("Ovo je ucenik " + ucenik.Ime + " " + ucenik.Prezime);
+				Console.WriteLine("Trenutno je clan razreda" + ucenik.Razred.Ime);
+				Console.WriteLine("Ovo su njegove ocijene iz Vašeg predmeta: ");
+				foreach (Ocjena ocjena in ucenik.DajOcjeneIzPredmeta(nastavnik.Predmet))
+				{
+					Console.WriteLine(ocjena.Vrijednost + " na datum " + ocjena.Datum);
+				}
+				Console.WriteLine(" ");
+				Console.WriteLine("1. Upisi novu ocjenu");
+				Console.WriteLine("2. Dodaj novi komentar");
+				Console.WriteLine("0. za povratak nazad");
                 string opcija = Console.ReadLine();
-                if (opcija.Equals("0")) return;
-                else Console.WriteLine("Neispravan unos!");
+
+				switch (opcija)
+				{
+					case "0":
+						return;
+					case "1":
+						UpisiOcjenu(ucenik, nastavnik);
+						break;
+					case "2":
+						UnesiNoviKomentar(ucenik, nastavnik);
+						break;
+					default:
+						  Console.WriteLine("Neispravan unos!");
+						break;
+				}
+				
+               
             }
         }
-    }
+		private static void UpisiOcjenu(Ucenik ucenik, Nastavnik nastavnik)
+		{
+			Console.Clear();
+			Console.WriteLine("Vrijednost(1-5) ili 0 za prekid: ");
+			int ocjena = Convert.ToInt32(Console.ReadLine());
+			if (ocjena == 0) return;
+			while (true)
+			{
+				try
+				{
+					nastavnik.UpisiOcjenu(ucenik, ocjena);
+					return;
+				}
+				catch (Exception ex)
+				{
+
+					Console.WriteLine(ex.Message);
+				}
+			}
+			
+		}
+
+		private static void UnesiNoviKomentar(Ucenik ucenik, Nastavnik nastavnik)
+		{
+			Console.Clear();
+
+			Console.WriteLine("Unesite vas komentar ili 0 za prekid: ");
+			String komentar = Console.ReadLine();
+			if (komentar.Equals("0")) return;
+			else ucenik.Komentari.Add(new Komentar(nastavnik, ucenik, komentar));
+
+
+		}
+
+		private static void PrikaziProsjekRazreda(Razred razred)
+		{
+			int broj;
+			try
+			{
+				Console.WriteLine("Prosjek ovog razreda je " + razred.DajProsjekRazreda());
+			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine(ex.Message);
+			}
+			string izbor = Console.ReadLine();
+			switch (izbor)
+			{
+				case "0":
+					return;
+					
+			}
+			while (true)
+			{
+				Console.WriteLine("0 za nazad: ");
+				broj = Convert.ToInt32(Console.ReadLine());
+				if (broj == 0) return;
+				if (broj != 0)
+					Console.WriteLine("Pogresan unos!");
+				else break;
+			}
+		}
+	}
+
+
+	
 
 }
