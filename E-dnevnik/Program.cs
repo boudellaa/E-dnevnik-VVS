@@ -10,7 +10,7 @@ public class Program
 		Nastavnik TrenutniNastavnik = null;
 		Ucenik TrenutniUcenik = null;
 
-
+		/*
 		foreach (var x in EDnevnik.Razredi)
 		{
 			foreach (var y in x.Razredi_Predmeti)
@@ -19,13 +19,13 @@ public class Program
 			}
 
 		}
-
+		*/
 	
 		
 
 		//pocetak aplikacije 
 
-		/* string korisnickoIme ="";
+		 string korisnickoIme ="";
 		 string sifra = "";
 		 while (true)
 		 {
@@ -61,7 +61,7 @@ public class Program
 				}
 
 			}
-		 }*/
+		 }
 		 
 	}
 

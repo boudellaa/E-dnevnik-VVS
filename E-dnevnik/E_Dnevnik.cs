@@ -21,11 +21,11 @@ namespace E_dnevnik
 
         public List<Predmet> Predmeti { get; set; }
 
-        
-        public E_Dnevnik()
-        {
 
-		
+		public E_Dnevnik()
+		{
+
+
 
 			Razredi = new List<Razred>
 		{
@@ -104,8 +104,8 @@ namespace E_dnevnik
 
 
 			};
-			Nastavnici = new List<Nastavnik> { 
-				new Nastavnik("Berin", "Karahodžić", "bera", "12345"), 
+			Nastavnici = new List<Nastavnik> {
+				new Nastavnik("Berin", "Karahodžić", "bera", "12345"),
 				new Nastavnik("Nedim", "Hošić", "hosa", "loslos") ,
 				new Nastavnik("Ali", "Boudellaa", "buda", "12345"),
 				new Nastavnik("Mujo", "Mujic", "mujo", "12345"),
@@ -124,36 +124,67 @@ namespace E_dnevnik
 			new Predmet("Engleski jezik")
 		};
 
-			for(int i=0;i<Nastavnici.Count;i++)
+			for (int i = 0; i < Nastavnici.Count; i++)
 			{
 				SpojiNastavnikPredmet(Nastavnici[i], Predmeti[i]);
 			}
 			var random = new Random();
 
-			for(int i=0;i<Ucenici.Count;i++)
+			for (int i = 0; i < Ucenici.Count; i++)
 			{
-				DodajUcenikaURazred(Ucenici[i], Razredi[random.Next(Razredi.Count-1)]);
-				
+				DodajUcenikaURazred(Ucenici[i], Razredi[random.Next(Razredi.Count - 1)]);
+
 			}
 
-			for(int i=0;i<Razredi.Count;i++)
+			for (int i = 0; i < Razredi.Count; i++)
 			{
-				for(int j=0;Razredi[i].Razredi_Predmeti.Count<3;j++)
+				for (int j = 0; Razredi[i].Razredi_Predmeti.Count < 3; j++)
 				{
-					int brojac = random.Next(Predmeti.Count-1);
+					int brojac = random.Next(Predmeti.Count - 1);
 					var tempPredmet = Predmeti[brojac];
 					if (Razredi[i].Razredi_Predmeti.Any(p => p.Predmet.Ime == tempPredmet.Ime)) continue;
 					SpojiRazredIPredmet(Razredi[i], Predmeti[brojac]);
 				}
-				
+
 			}
 
+            foreach (var ucenik in Ucenici)
+            {
+                DajOcjene(ucenik);
+            }
 
+        }
 
-			 
-		}
+        public void DajOcjene(Ucenik ucenik)
+        {
+            var random = new Random();
+            foreach (var predmet in Predmeti)
+            {
+                bool ucenikImaPredmet = ucenik.Razred.Razredi_Predmeti.Any(rp => rp.Predmet == predmet);
 
-		public void SpojiRazredIPredmet(Razred razred, Predmet predmet)
+                if (!ucenikImaPredmet)
+                {
+                    continue;
+                }
+                int brojOcjena = random.Next(5, 11);
+                for (int i = 0; i < brojOcjena; i++)
+                {
+                    int ocjena = random.Next(1, 6);
+                    var datum = NasumicniDatum(random);
+                    ucenik.Ocjene.Add(new Ocjena(ocjena, ucenik, predmet, datum));
+                }
+            }
+        }
+
+        private DateTime NasumicniDatum(Random x)
+        {
+            DateTime start = new DateTime(2022, 9, 1);
+            DateTime end = new DateTime(2023, 6, 30);
+            int range = (end - start).Days;
+            return start.AddDays(x.Next(range));
+        }
+
+        public void SpojiRazredIPredmet(Razred razred, Predmet predmet)
 		{
 			var razred_predmet = new Razred_Predmet(razred, predmet);
 			razred.Razredi_Predmeti.Add(razred_predmet);
@@ -339,10 +370,9 @@ namespace E_dnevnik
 			while (true)
 			{
 				Console.Clear();
-				Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime);
+				Console.WriteLine("Dobrodošli nastavniče " + nastavnik.Ime + " " + nastavnik.Prezime + ", predmet koji predajete je " + nastavnik.Predmet.Ime + ".");
 				Console.WriteLine("Unesite: ");
-				Console.WriteLine("1 za pregled predmeta koji predajete");
-				Console.WriteLine("2 za pregled razreda kojima predajete");
+				Console.WriteLine("1 za pregled razreda kojima predajete");
 				Console.WriteLine("0 za povratak unazad");
 				string opcija = Console.ReadLine();
 				switch (opcija)
@@ -350,9 +380,6 @@ namespace E_dnevnik
 					case "0":
 						return;
 					case "1":
-						PrikaziNastavnikovePredmete(nastavnik);
-						break;
-					case "2":
 						PrikaziNastavnikoveRazrede(nastavnik);
 						break;
 				}
@@ -360,6 +387,7 @@ namespace E_dnevnik
 
 		}
 
+		/*
 		 public void PrikaziNastavnikovePredmete(Nastavnik nastavnik)
 		{
 
@@ -374,11 +402,66 @@ namespace E_dnevnik
 			}
 		}
 		
-
+		*/
 		private static void PrikaziNastavnikoveRazrede(Nastavnik nastavnik)
 		{
-			throw new NotImplementedException();
-		}
+			List<Razred> nastavnikoviRazredi = nastavnik.Predmet.DajSveRazredeNaPredmetu();
+
+			if(nastavnikoviRazredi.Count == 0)
+			{
+				Console.WriteLine("Trenutno ne predajete nijednom razredu.");
+			}
+			else
+			{
+                Console.WriteLine("Razredi kojima predajete:");
+                for (int i = 0; i < nastavnikoviRazredi.Count; i++)
+                {
+                    Console.WriteLine( i + 1  + ". " + nastavnikoviRazredi[i].Ime);
+                }
+            }
+
+            Console.WriteLine("Unesite broj pored razreda da izaberete razred: ");
+            string opcija = Console.ReadLine();
+            int odabraniBroj;
+            if (int.TryParse(opcija, out odabraniBroj) && odabraniBroj > 0 && odabraniBroj <= nastavnikoviRazredi.Count)
+            {
+                Razred odabraniRazred = nastavnikoviRazredi[odabraniBroj - 1];
+
+                string izbor;
+             
+                Console.Clear();
+                Console.WriteLine("Izabrali ste razred: " + odabraniRazred.Ime);
+                Console.WriteLine("1 za prosjek razreda");
+                Console.WriteLine("2 za pregled svih učenika u razreda");
+                Console.WriteLine("0 za povratak unazad");
+                Console.Write("Unesite vaš izbor: ");
+                izbor = Console.ReadLine();
+
+                switch (izbor)
+                {
+					case "0":
+						return;
+					case "1":
+						Console.WriteLine("Prosjek razreda " + odabraniRazred.Ime + " je: " + odabraniRazred.DajProsjekRazreda());
+                        Console.WriteLine("Pritisnite bilo koju tipku za povratak na pocetak: ");
+                        Console.ReadKey();
+                        break;
+					case "2":
+						foreach(var ucenik in odabraniRazred.DajSveUcenike())
+						{
+							Console.WriteLine(ucenik.Ime + " " + ucenik.Prezime);
+						}
+                        Console.WriteLine("Pritisnite bilo koju tipku za povratak na pocetak: ");
+                        Console.ReadKey();
+                        break;
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Unesite validan broj razreda.");
+            }
+        }
 
 
 

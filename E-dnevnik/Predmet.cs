@@ -62,6 +62,20 @@ namespace E_dnevnik
             return temp;
         }
 
+        public List<Razred> DajSveRazredeNaPredmetu()
+        {
+            var razredi = new List<Razred>();
+            foreach (var x in Razredi_Predmeti)
+            {
+                if (!razredi.Contains(x.Razred))
+                {
+                    razredi.Add(x.Razred);
+                }
+            }
+
+            return razredi;
+        }
+
         //public void DodajRazred(Razred razred)
         //{
         //    Razredi.Add(razred);
