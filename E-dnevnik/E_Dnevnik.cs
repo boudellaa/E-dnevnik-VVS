@@ -483,8 +483,8 @@ namespace E_dnevnik
         {
 			while (true)
 			{
-				Console.Clear();
-				Console.WriteLine("Izabrali ste razred: " + razred.Ime);
+                Console.Clear();
+                Console.WriteLine("Izabrali ste razred: " + razred.Ime);
 				Console.WriteLine("1 za prosjek razreda");
 				Console.WriteLine("2 za pregled svih učenika u razreda");
 				Console.WriteLine("0 za povratak unazad");

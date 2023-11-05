@@ -10,19 +10,6 @@ public class Program
 		Nastavnik TrenutniNastavnik = null;
 		Ucenik TrenutniUcenik = null;
 
-		/*
-		foreach (var x in EDnevnik.Razredi)
-		{
-			foreach (var y in x.Razredi_Predmeti)
-			{
-				Console.WriteLine(y.Predmet.Ime + " " + y.Razred.Ime);
-			}
-
-		}
-		*/
-	
-		
-
 		//pocetak aplikacije 
 
 		 string korisnickoIme ="";
@@ -32,6 +19,8 @@ public class Program
 			 Console.Clear();
 			 do
 			 {
+				 Console.WriteLine("Dobrodošli u E-Dnevnik!");
+				Console.WriteLine("Ulogujte se kako bi nastavili");
 				 Console.WriteLine("Unesite korisničko ime: ");
 				 korisnickoIme = Console.ReadLine();
 			 } while (korisnickoIme.Length == 0);
@@ -56,7 +45,6 @@ public class Program
 				if (ucenik != null)
 				{
 					TrenutniUcenik = ucenik;
-					
 					EDnevnik.PrikaziUcenickiMeni(ucenik);
 				}
 
