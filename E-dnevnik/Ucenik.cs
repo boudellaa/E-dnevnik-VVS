@@ -85,6 +85,11 @@ namespace E_dnevnik
             return temp;
 
         }
+
+        public List<Ocjena> DajOcjeneIzPredmeta(Predmet predmet)
+        {
+            return this.Ocjene.Where(oc => oc.Predmet.Ime.Equals(predmet.Ime)).ToList();
+        }
     }
 
 }
