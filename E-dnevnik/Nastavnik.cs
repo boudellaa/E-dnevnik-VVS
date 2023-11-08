@@ -45,47 +45,20 @@ namespace E_dnevnik
 
 		public void NoviKomentar(Ucenik ucenik, string opis)
 		{
-			if (opis == null) return;
+			if (opis == null) throw new Exception("Komentar ne moze biti prazan!");
 			ucenik.Komentari.Add(new Komentar(this, ucenik, opis));
 		}
 
-        /*
-		public IEnumerable<Ucenik> DajSvojeUcenike()
-		{
-			List<Ucenik> temp = new List<Ucenik>();
-			if (Predmeti.Count == 0)
-			{
-				throw new InvalidOperationException("Nastavnik nema predmeta.");
-			}
-
-			Console.WriteLine($"Učenici nastavnika {Ime} {Prezime}:");
-
-			foreach (var predmet in Predmeti)
-			{
-				try
-				{
-					foreach (var ucenik in predmet.DajSveUcenike())
-					{
-						temp.Add(ucenik);
-					}
-				}
-				catch (Exception e)
-				{
-					continue;
-				}
-			}
-			if (temp.Count == 0) throw new Exception("Nastavnik nema učenika!");
-			return temp;
-		}
-
+        
+		
 		      
 		
 		public Double IzracunajProsjekRazreda()
         {
 			try
 			{
-				var ucenici = DajSvojeUcenike();
-				return ucenici.Average(u => u.Ocjene.Average());
+				var ucenici = Predmet.DajSveUcenikeNaPredmetu();
+				return ucenici.Average(u => u.DajUkupanProsjekUcenika());
 			}
 			catch (Exception ex)
 			{
@@ -96,7 +69,7 @@ namespace E_dnevnik
         }
 		
        
-		*/
+		
     }
 
 }
