@@ -17,8 +17,5 @@ namespace E_dnevnik
 			Predmet = predmet;
 			Razred = razred;
 		}
-
-
-
 	}
 }
