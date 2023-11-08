@@ -71,3 +71,6 @@ C:\Users\Svage\Documents\Fax\vvs\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnev
 C:\Users\Svage\Documents\Fax\vvs\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\E-dnevnik.pdb
 C:\Users\Svage\Documents\Fax\vvs\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.genruntimeconfig.cache
 C:\Users\Svage\Documents\Fax\vvs\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\ref\E-dnevnik.dll
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.AssemblyReference.cache
+C:\Users\Nedim Krupalija\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.CopyComplete

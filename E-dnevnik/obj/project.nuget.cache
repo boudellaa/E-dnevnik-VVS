@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dSOqn7S0uDD+7gHsdccTSxeFBmWnuuTAV23d25q0trEgDzfs6puTbtvvnweUX2RpsVDnMG9AzJliq+TKquCCCQ==",
+  "dgSpecHash": "vpxXUiO8fQUBnv6/dQaSuAWPl1Z7T5sFSiYXHiDYqgq8S0pfLtJOHfKj9jTQ/vnTJRZsw6T4ygUw8cA3IY22xA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Nedim Krupalija\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

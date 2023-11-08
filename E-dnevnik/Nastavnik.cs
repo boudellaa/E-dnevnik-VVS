@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,9 +51,38 @@ namespace E_dnevnik
 			ucenik.Komentari.Add(new Komentar(this, ucenik, opis));
 		}
 
-        
+        public void NapraviPrisustvo(List<Ucenik> ucenici)
+		{
+			var zapis = new List<Tuple<string, string>>();
+			foreach(var ucenik in ucenici)
+			{
+				zapis.Add(new Tuple<string, string>(ucenik.Ime, ucenik.Prezime));
+			}
+			using (var sr = new StreamWriter("C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\E-dnevnik\\prisustvo.csv", false, Encoding.UTF8))
+			{
+				using (var csv = new CsvWriter(sr, CultureInfo.InvariantCulture))
+				{
+					csv.WriteRecords(zapis);
+				}
+			}
+			
+			
+		}
 		
-		      
+		public List<Ucenik> DajSveUcenikeNastavnika()
+		{
+			foreach(var x in Predmet.Razredi_Predmeti)
+			{
+				if(x.Predmet.Ime==Predmet.Ime)
+				{
+					if(x.Razred.Ucenici==null||x.Razred.Ucenici.Count==0)
+						throw new Exception("Nastavnik nema ucenika!");
+					return x.Razred.Ucenici;
+				}
+			}
+			throw new Exception("Nastavnik nema ucenika!");
+
+		}
 		
 		public Double IzracunajProsjekRazreda()
         {

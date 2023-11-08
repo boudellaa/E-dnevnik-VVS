@@ -352,6 +352,7 @@ private static void PrikaziUcenickiMeni(Ucenik ucenik)
 			Console.WriteLine("Izabrali ste razred: " + razred.Ime);
 			Console.WriteLine("1 za prosjek razreda");
 			Console.WriteLine("2 za pregled svih učenika u razreda");
+			Console.WriteLine("3 za unos novog prisustva");
 			Console.WriteLine("0 za povratak unazad");
 			Console.Write("Unesite vaš izbor: ");
 			string izbor = Console.ReadLine();
@@ -366,9 +367,73 @@ private static void PrikaziUcenickiMeni(Ucenik ucenik)
 
 					PrikaziUcenikeRazreda(razred, nastavnik);
 					break;
+				case "3":
+					PrikaziMeniPrisustvo(razred, nastavnik);
+					break;
 
 			}
 		}
+	}
+
+	private static void PrikaziMeniPrisustvo(Razred razred,Nastavnik nastavnik)
+	{
+		
+			
+			var ucenici = new List<Ucenik>();
+			var listaPrisutnih = new List<Ucenik>();
+			try
+			{
+				ucenici.AddRange(nastavnik.DajSveUcenikeNastavnika());
+			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine(ex.Message);
+				return;
+			}
+		
+		while (true)
+		{
+			Console.Clear();
+			Console.WriteLine("Odaberite redni broj ucenika koji je prisutan (0 za prekid, -1 za potvrdu unosa): ");
+			int broj=-1;
+			if(ucenici.Count==0)
+			{
+				nastavnik.NapraviPrisustvo(listaPrisutnih);
+				return;
+			}
+			for (int i = 0; i < ucenici.Count; i++)
+			{
+				Console.WriteLine(i + 1 + ". " + ucenici[i].Ime + " " + ucenici[i].Prezime);
+			}
+			try
+			{
+				broj = Convert.ToInt32(Console.ReadLine());
+				if (broj == 0) return;
+				if (broj < 0 || broj > ucenici.Count)
+					throw new Exception("Pogresan unos!");
+				if (broj == -1)
+				{
+					nastavnik.NapraviPrisustvo(listaPrisutnih);
+					return;
+				}
+			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine(ex.Message);
+				continue;
+			}
+			listaPrisutnih.Add(ucenici[broj - 1]);
+			ucenici.Remove(ucenici[broj - 1]);
+
+
+
+		}
+			
+
+			
+		
 	}
 
 

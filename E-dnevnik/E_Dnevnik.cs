@@ -247,27 +247,27 @@ namespace E_dnevnik
 		}
 
 
-
-		public string RegistrujUcenika(string ime, string prezime, string password)
+	
+			public string RegistrujUcenika(string ime, string prezime, string password)
+	{
+		string username = ime[0] + prezime;
+		if (username.Length > 10)
+			username = username.Substring(0, 10);
+		username = username + "1";
+		username = username.ToLower();
+		while (Ucenici.Exists(u => u.KorisnickoIme == username))
 		{
-			string username = ime[0] + prezime;
-			if (username.Length > 10)
-				username = username.Substring(0, 10);
-			username = username + "1";
-			username = username.ToLower();
-			while (Ucenici.Exists(u => u.KorisnickoIme == username))
-			{
-				int br = 2;
-				username = username.Substring(0, username.Length - 1);
-				username = username + br.ToString();
-				br++;
-			}
-			var ucenik = new Ucenik((char.ToUpper(ime[0]) + ime.Substring(1).ToLower()), (char.ToUpper(prezime[0]) + prezime.Substring(1).ToLower()), username, password);
-			var random = new Random();
-			Ucenici.Add(ucenik);
-			DodajUcenikaURazred(ucenik, Razredi[random.Next(Razredi.Count - 1)]);
-			return username;
+			int br = 2;
+			username = username.Substring(0, username.Length - 1);
+			username = username + br.ToString();
+			br++;
 		}
+		var ucenik = new Ucenik((char.ToUpper(ime[0]) + ime.Substring(1).ToLower()), (char.ToUpper(prezime[0]) + prezime.Substring(1).ToLower()), username, password);
+		var random = new Random();
+		Ucenici.Add(ucenik);
+		DodajUcenikaURazred(ucenik, Razredi[random.Next(Razredi.Count - 1)]);
+		return username;
+	}
 	}
 
 
