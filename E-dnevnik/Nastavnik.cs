@@ -73,7 +73,7 @@ namespace E_dnevnik
 		{
 			foreach(var x in Predmet.Razredi_Predmeti)
 			{
-				if(x.Predmet.Ime==Predmet.Ime)
+				if(x.Predmet.Nastavnik.Ime==Ime)
 				{
 					if(x.Razred.Ucenici==null||x.Razred.Ucenici.Count==0)
 						throw new Exception("Nastavnik nema ucenika!");

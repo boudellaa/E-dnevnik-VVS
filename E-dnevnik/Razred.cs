@@ -48,16 +48,10 @@ namespace E_dnevnik
             
         }
 
-        public List<Ucenik> DajSveUcenike()
-        {
-            List<Ucenik> ucenici = new List<Ucenik>();
-            foreach(var x in Ucenici)
-            {
-                ucenici.Add(x);
-            }
-            if (ucenici.Count == 0) throw new Exception("Razred nema učenika");
-            return ucenici;
-        }
+
+
+
+        
         
     }
 

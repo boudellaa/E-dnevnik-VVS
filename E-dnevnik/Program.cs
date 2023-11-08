@@ -383,7 +383,7 @@ private static void PrikaziUcenickiMeni(Ucenik ucenik)
 			var listaPrisutnih = new List<Ucenik>();
 			try
 			{
-				ucenici.AddRange(nastavnik.DajSveUcenikeNastavnika());
+				ucenici.AddRange(razred.Ucenici);
 			}
 			catch (Exception ex)
 			{
@@ -410,13 +410,14 @@ private static void PrikaziUcenickiMeni(Ucenik ucenik)
 			{
 				broj = Convert.ToInt32(Console.ReadLine());
 				if (broj == 0) return;
-				if (broj < 0 || broj > ucenici.Count)
-					throw new Exception("Pogresan unos!");
 				if (broj == -1)
 				{
 					nastavnik.NapraviPrisustvo(listaPrisutnih);
 					return;
 				}
+				if (broj < 0 || broj > ucenici.Count)
+					throw new Exception("Pogresan unos!");
+				
 			}
 			catch (Exception ex)
 			{
@@ -442,7 +443,7 @@ private static void PrikaziUcenickiMeni(Ucenik ucenik)
 		List<Ucenik> ucenici = new();
 		try
 		{
-			ucenici = razred.DajSveUcenike();
+			ucenici = razred.Ucenici;
 		}
 		catch (Exception)
 		{
