@@ -43,10 +43,8 @@ namespace E_dnevnik
 
         public void DodajUcenika(Ucenik ucenik)
         {
-
 			ucenik.Razred = this;
-			Ucenici.Add(ucenik);
-            
+			Ucenici.Add(ucenik);   
             
         }
 
