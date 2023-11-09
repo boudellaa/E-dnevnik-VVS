@@ -91,3 +91,20 @@ C:\Users\Student\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\refint\E-dnevnik.dll
 C:\Users\Student\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.pdb
 C:\Users\Student\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.genruntimeconfig.cache
 C:\Users\Student\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\ref\E-dnevnik.dll
+C:\Users\DT User\Desktop\vvs\E-dnevnik\bin\Debug\net6.0\E-dnevnik.exe
+C:\Users\DT User\Desktop\vvs\E-dnevnik\bin\Debug\net6.0\E-dnevnik.deps.json
+C:\Users\DT User\Desktop\vvs\E-dnevnik\bin\Debug\net6.0\E-dnevnik.runtimeconfig.json
+C:\Users\DT User\Desktop\vvs\E-dnevnik\bin\Debug\net6.0\E-dnevnik.dll
+C:\Users\DT User\Desktop\vvs\E-dnevnik\bin\Debug\net6.0\E-dnevnik.pdb
+C:\Users\DT User\Desktop\vvs\E-dnevnik\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.AssemblyReference.cache
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.AssemblyInfoInputs.cache
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.AssemblyInfo.cs
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.CoreCompileInputs.cache
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.CopyComplete
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.dll
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\refint\E-dnevnik.dll
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.pdb
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.genruntimeconfig.cache
+C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\ref\E-dnevnik.dll
