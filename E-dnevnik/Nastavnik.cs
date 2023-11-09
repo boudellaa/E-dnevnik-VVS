@@ -40,7 +40,16 @@ namespace E_dnevnik
 
 		public void UpisiOcjenu(Ucenik ucenik, int vrijednost)
 		{
-			if (vrijednost < 1 || vrijednost > 5) throw new Exception("Ocjena mora biti u opsegu 1 do 5!");
+			try
+			{
+                Ocjena.ValidirajOcjenu(vrijednost);
+            }
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+				
 			ucenik.Ocjene.Add(new Ocjena(vrijednost, ucenik, Predmet, DateTime.Now));
 		}
 

@@ -28,6 +28,13 @@ namespace E_dnevnik
 			Datum = datum;
 		}
 
+        public static bool ValidirajOcjenu(int vrijednost)
+        {
+            if (vrijednost <= 0 || vrijednost > 5)
+                throw new Exception("Ocjena mora imati vrijednost od 1 do 5!");
+            return true;
+        }
+
 		
 	}
 }

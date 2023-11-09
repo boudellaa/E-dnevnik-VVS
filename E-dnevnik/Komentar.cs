@@ -28,5 +28,11 @@ namespace E_dnevnik
 			
 		}	
 		 
+		public static bool ValidirajKomentar(String opis)
+		{
+			if (opis == null || opis.Length == 0)
+				throw new Exception("Komentar ne smije biti prazan!");
+			return true;
+		}
 	}
 }

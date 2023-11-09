@@ -43,13 +43,15 @@ namespace E_dnevnik
 
         public void DodajUcenika(Ucenik ucenik)
         {
+            for(var i=0;i<Ucenici.Count;i++)
+            {
+                if (Ucenici[i].KorisnickoIme == ucenik.KorisnickoIme)
+                    throw new Exception("Ucenik već postoji u razredu!");
+            }
 			ucenik.Razred = this;
 			Ucenici.Add(ucenik);   
             
         }
-
-
-
 
         
         
