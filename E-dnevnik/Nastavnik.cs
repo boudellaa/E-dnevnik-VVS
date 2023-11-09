@@ -58,7 +58,7 @@ namespace E_dnevnik
 			{
 				zapis.Add(new Tuple<string, string>(ucenik.Ime, ucenik.Prezime));
 			}
-			using (var sr = new StreamWriter("C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\E-dnevnik\\prisustvo.csv", false, Encoding.UTF8))
+			using (var sr = new StreamWriter("C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\prisustvo.csv", false, Encoding.UTF8))
 			{
 				using (var csv = new CsvWriter(sr, CultureInfo.InvariantCulture))
 				{
