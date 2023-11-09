@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj": {}
+    "C:\\Users\\DT User\\Desktop\\vvs\\E-dnevnik\\E-dnevnik.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj": {
+    "C:\\Users\\DT User\\Desktop\\vvs\\E-dnevnik\\E-dnevnik.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
+        "projectUniqueName": "C:\\Users\\DT User\\Desktop\\vvs\\E-dnevnik\\E-dnevnik.csproj",
         "projectName": "E-dnevnik",
-        "projectPath": "C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\E-dnevnik.csproj",
-        "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\obj\\",
+        "projectPath": "C:\\Users\\DT User\\Desktop\\vvs\\E-dnevnik\\E-dnevnik.csproj",
+        "packagesPath": "C:\\Users\\DT User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DT User\\Desktop\\vvs\\E-dnevnik\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Student\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DT User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

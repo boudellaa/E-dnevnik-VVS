@@ -47,7 +47,17 @@ public class Program
 						sifra = Console.ReadLine();
 					} while (sifra.Length == 0);
 
-					Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == korisnickoIme && nastavnik.Sifra == sifra);
+					Nastavnik? nastavnik = null;
+					try
+					{
+                        nastavnik = EDnevnik.ValidirajLoginNastavnika(EDnevnik, korisnickoIme, sifra);
+                    }
+					catch (Exception)
+					{
+
+						throw;
+					}
+					
 					if (nastavnik != null)
 					{
 						TrenutniNastavnik = nastavnik;
@@ -57,8 +67,17 @@ public class Program
 
 					else
 					{
-						Ucenik? ucenik = EDnevnik.Ucenici.SingleOrDefault(ucenik => ucenik.KorisnickoIme == korisnickoIme && ucenik.Sifra == sifra);
-						if (ucenik != null)
+						Ucenik ucenik = null;
+						try
+						{
+                            ucenik = EDnevnik.ValidirajLoginUcenika(EDnevnik, korisnickoIme, sifra);
+                        }
+						catch (Exception)
+						{
+                            Console.WriteLine("Pogrešni podaci. Napišite 0 za povratak ili bilo šta drugo za ponovni unos.");
+							break;
+						}
+                        if (ucenik != null)
 						{
 							TrenutniUcenik = ucenik;
 							PrikaziUcenickiMeni(ucenik);
