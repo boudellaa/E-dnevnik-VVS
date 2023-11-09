@@ -47,7 +47,7 @@ public class Program
 						sifra = Console.ReadLine();
 					} while (sifra.Length == 0);
 
-					Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == korisnickoIme && nastavnik.Sifra == sifra);
+					Nastavnik? nastavnik = EDnevnik.ValidirajLoginNastavnika(EDnevnik,korisnickoIme,sifra);
 					if (nastavnik != null)
 					{
 						TrenutniNastavnik = nastavnik;
@@ -57,8 +57,8 @@ public class Program
 
 					else
 					{
-						Ucenik? ucenik = EDnevnik.Ucenici.SingleOrDefault(ucenik => ucenik.KorisnickoIme == korisnickoIme && ucenik.Sifra == sifra);
-						if (ucenik != null)
+						Ucenik? ucenik = EDnevnik.ValidirajLoginUcenika(EDnevnik, korisnickoIme, sifra);
+                        if (ucenik != null)
 						{
 							TrenutniUcenik = ucenik;
 							PrikaziUcenickiMeni(ucenik);
