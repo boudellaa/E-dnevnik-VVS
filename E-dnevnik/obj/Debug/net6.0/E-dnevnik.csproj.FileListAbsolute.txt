@@ -108,3 +108,9 @@ C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\refint\E-dnevnik.dll
 C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.pdb
 C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\E-dnevnik.genruntimeconfig.cache
 C:\Users\DT User\Desktop\vvs\E-dnevnik\obj\Debug\net6.0\ref\E-dnevnik.dll
+<<<<<<< HEAD
+=======
+C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\Treca godina\VVS\E-dnevnik-VVS\E-dnevnik\obj\Debug\net6.0\E-dnevnik.csproj.CopyComplete
+>>>>>>> 28ee806c3a22a38288682b61a8fe9c99d57b518d
