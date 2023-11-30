@@ -57,8 +57,6 @@ namespace E_dnevnik
 		public void NoviKomentar(Ucenik ucenik, string opis)
 		{
 			if (opis == null) throw new Exception("Komentar ne moze biti prazan!");
-			if (ucenik == null) throw new Exception("Ucenik nije definisan!");
-			if (ucenik.Komentari == null) throw new Exception("Objekat komentari ucenika nije definisan!");
 			ucenik.Komentari.Add(new Komentar(this, ucenik, opis));
 		}
 
@@ -69,7 +67,7 @@ namespace E_dnevnik
 			{
 				zapis.Add(new Tuple<string, string>(ucenik.Ime, ucenik.Prezime));
 			}
-			using (var sr = new StreamWriter("prisustvo.csv", false, Encoding.UTF8))
+			using (var sr = new StreamWriter("C:\\Users\\Student\\E-dnevnik-VVS\\E-dnevnik\\prisustvo.csv", false, Encoding.UTF8))
 			{
 				using (var csv = new CsvWriter(sr, CultureInfo.InvariantCulture))
 				{
