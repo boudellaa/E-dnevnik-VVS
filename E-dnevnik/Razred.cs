@@ -29,6 +29,10 @@ namespace E_dnevnik
             {
                 foreach(var ocjena in x.Ocjene)
                 {
+                    if (!Ocjena.ValidirajOcjenu(ocjena.Vrijednost))
+                    {
+                        throw new Exception("Ocjena mora imati vrijednost od 1 do 5!");
+                    }
                     if (ocjena.Vrijednost != 0)
                     {
 						temp += ocjena.Vrijednost;
