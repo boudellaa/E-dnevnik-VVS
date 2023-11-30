@@ -274,9 +274,9 @@ namespace E_dnevnik
 			username = username.Substring(0, 10);
 		username = username + "1";
 		username = username.ToLower();
-		while (Ucenici.Exists(u => u.KorisnickoIme == username))
+        int br = 2;
+        while (Ucenici.Exists(u => u.KorisnickoIme == username))
 		{
-			int br = 2;
 			username = username.Substring(0, username.Length - 1);
 			username = username + br.ToString();
 			br++;

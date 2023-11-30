@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\E-dnevnik"
+    "\\E-dnevnik",
+    "\\E-dnevnik\\JSON",
+    "\\E-dnevnik\\JSON\\Schemas",
+    "\\E-dnevnik\\JSON\\Schemas\\Catalog"
   ],
-  "SelectedNode": "\\E-dnevnik\\Program.cs",
+  "SelectedNode": "\\E-dnevnik\\E_Dnevnik.cs",
   "PreviewInSolutionExplorer": false
 }
