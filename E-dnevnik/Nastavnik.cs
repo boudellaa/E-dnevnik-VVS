@@ -57,8 +57,8 @@ namespace E_dnevnik
 		public void NoviKomentar(Ucenik ucenik, string opis)
 		{
 			if (opis == null) throw new Exception("Komentar ne moze biti prazan!");
-			if (Ucenik == null) throw new Exception("Ucenik nije definisan!");
-			if(ucenik.Komentari == null) throw new Exception("Komentari ucenika nisu definisani!")
+			if (ucenik == null) throw new Exception("Ucenik nije definisan!");
+			if (ucenik.Komentari == null) throw new Exception("Komentari ucenika nisu definisani!");
 			ucenik.Komentari.Add(new Komentar(this, ucenik, opis));
 		}
 
