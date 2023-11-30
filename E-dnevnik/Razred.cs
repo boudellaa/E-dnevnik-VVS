@@ -37,12 +37,13 @@ namespace E_dnevnik
 
                 }
             }
+            if (brojac == 0) throw new Exception("Razred nema ocjena!"); 
             return temp/brojac;
         }
 
         public void DodajUcenika(Ucenik ucenik)
         {
-            for(var i=0;i<=Ucenici.Count;i++)
+            for(var i=0;i<Ucenici.Count;i++)
             {
                 if (Ucenici[i].KorisnickoIme == ucenik.KorisnickoIme)
                     throw new Exception("Ucenik već postoji u razredu!");

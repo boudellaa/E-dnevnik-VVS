@@ -155,14 +155,14 @@ namespace E_dnevnik
 
         }
 
-		public Nastavnik? ValidirajLoginNastavnika(E_Dnevnik EDnevnik, String username, String password)
-		{
+        public Nastavnik? ValidirajLoginNastavnika(E_Dnevnik EDnevnik, String username, String password)
+        {
             Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == username && nastavnik.Sifra == password);
             if (nastavnik != null)
             {
                 return nastavnik;
             }
-			return null;
+            return null;
         }
 
         public Ucenik? ValidirajLoginUcenika(E_Dnevnik EDnevnik, String username, String password)
