@@ -49,7 +49,8 @@ namespace E_dnevnik
 
 				throw new Exception(ex.Message);
 			}
-				
+			if (ucenik == null)
+				throw new Exception("Ucenik ne postoji!");
 			ucenik.Ocjene.Add(new Ocjena(vrijednost, ucenik, Predmet, DateTime.Now));
 		}
 
