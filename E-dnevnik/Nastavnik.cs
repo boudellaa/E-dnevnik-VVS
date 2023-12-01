@@ -53,7 +53,7 @@ namespace E_dnevnik
 				throw new Exception("Ucenik ne postoji!");
 			ucenik.Ocjene.Add(new Ocjena(vrijednost, ucenik, Predmet, DateTime.Now));
 		}
-
+		
 
 		public void NoviKomentar(Ucenik ucenik, string opis)
 		{
