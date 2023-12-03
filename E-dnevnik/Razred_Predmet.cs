@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_dnevnik
+namespace Ednevnik
 {
 	public class Razred_Predmet
 	{

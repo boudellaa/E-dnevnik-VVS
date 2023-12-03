@@ -1,4 +1,4 @@
-﻿using E_dnevnik;
+﻿using Ednevnik;
 using System.Runtime.CompilerServices;
 
 public class Program
