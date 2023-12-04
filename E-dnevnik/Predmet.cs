@@ -28,7 +28,7 @@ namespace Ednevnik
             nastavnik.Predmet = this;
         }
 
-        public Double DajProsjekPredemta()
+        public Double DajProsjekPredmeta()
         {
             Double temp = 0;
             double brojac = 0;
