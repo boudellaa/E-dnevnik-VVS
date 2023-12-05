@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_dnevnik;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ednevnik
 {
-    public class Ucenik
+    public class Ucenik : IUcenik
     {
 
 

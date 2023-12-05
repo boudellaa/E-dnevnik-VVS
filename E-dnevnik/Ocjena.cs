@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_dnevnik;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,15 +14,16 @@ namespace Ednevnik
         public DateTime Datum {  get; set; }
 
         
-        public Ucenik Ucenik { get; set; }
+        public IUcenik Ucenik { get; set; }
 
         public Predmet Predmet { get; set; }
 
 
         public Ocjena() { }
 
-        public Ocjena(int vrijednost, Ucenik ucenik, Predmet predmet, DateTime datum)
+        public Ocjena(int vrijednost, IUcenik ucenik, Predmet predmet, DateTime datum)
 		{
+            ValidirajOcjenu(vrijednost);
 			Vrijednost = vrijednost;
 			Ucenik = ucenik;
 			Predmet = predmet;

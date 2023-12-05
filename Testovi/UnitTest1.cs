@@ -1,4 +1,5 @@
 
+using E_dnevnik;
 using Ednevnik;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
@@ -38,6 +39,7 @@ namespace Testovi
 
 		}
 
+		// Prosjek na predmetu
 		[TestMethod]
 		public void TestMethod1()
 		{
@@ -75,7 +77,7 @@ namespace Testovi
 
 			
 				
-			Console.WriteLine("#"+predmeti.ToString());
+			
 			return predmeti;
 		}
 
@@ -111,6 +113,87 @@ namespace Testovi
 
 		}
 
+		//Ucenik nema ocjena nikako
+		[TestMethod]
+		public void test3()
+		{
+			Test1Initialize();
+			Assert.AreEqual(0, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
+			Assert.AreEqual(0, ucenik.DajUkupanProsjekUcenika());
+		}
 
+		//Test ocjena nije validna
+		[TestMethod]
+		[ExpectedException(typeof(Exception))]
+		public void test4()
+		{
+			var ocjena = new Ocjena(55, new UcenikDummy(), new Predmet("Test"), DateTime.Now);
+		}
+
+
+		// Ukupan prosjek ucenika ddt js/csv mozda
+		[TestMethod]
+		public void test5()
+		{
+			Test1Initialize();
+			
+		}
+
+		public static IEnumerable<object[]> OcjeneData
+		{
+			get
+			{
+				return new[]
+				{
+					new object[] {new List<Ocjena> { new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+									new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+					new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+					new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+					new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+					new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+					new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now)},
+						1.0 },
+					new object[]
+					{
+						new List<Ocjena> { new Ocjena(1,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(2,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(3,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(4,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(5,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(5,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(4,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						},
+						24.0/7
+					},
+					new object[]
+					{
+						new List<Ocjena> { new Ocjena(5,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(4,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(5,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(4,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(5,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(4,new UcenikDummy(),new Predmet(""),DateTime.Now),
+						new Ocjena(5,new UcenikDummy(),new Predmet(""),DateTime.Now)},
+						32.0/7
+					}
+
+				};
+			}
+		}
+		//test ukupan prosjek ucenika
+		[TestMethod]
+		[DynamicData(nameof(OcjeneData))]
+		public void test6(List<Ocjena> ocjene, double ocekivano)
+		{
+			Test1Initialize();
+			ucenik.Ocjene = ocjene;
+			Assert.AreEqual("Test", ucenik.Ime);
+			Assert.AreEqual("Test", ucenik.Prezime);
+			Assert.AreEqual("Test", ucenik.Sifra);
+			Assert.AreEqual("Test", ucenik.KorisnickoIme);
+			Assert.AreEqual(ocekivano, ucenik.DajUkupanProsjekUcenika());
+
+			
+		}
 	}
 }
