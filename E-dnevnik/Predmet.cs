@@ -24,29 +24,36 @@ namespace Ednevnik
 
         public void DodijeliNastavnika(Nastavnik nastavnik)
         {
+            if (nastavnik == null)
+            {
+                throw new ArgumentNullException(nameof(nastavnik));
+            }
+
             Nastavnik = nastavnik;
             nastavnik.Predmet = this;
         }
 
         public Double DajProsjekPredmeta()
         {
-            Double temp = 0;
+            double temp = 0;
             double brojac = 0;
-            foreach(var x in Razredi_Predmeti)
+
+            foreach (var x in Razredi_Predmeti)
             {
-                if(x.Predmet.Ime == this.Ime)
+                if (x.Predmet.Ime == this.Ime)
                 {
-                    foreach(var ucenik in x.Razred.Ucenici)
+                    foreach (var ucenik in x.Razred.Ucenici)
                     {
-                        
-                        temp = ucenik.DajProsjekUcenikaNaPredmetu(this);
-                        if (Convert.ToInt32(temp) != 0) brojac++;
+                        temp += ucenik.DajProsjekUcenikaNaPredmetu(this);
+                        brojac++;
                     }
                 }
             }
+
             if (brojac != 0) return temp / brojac;
             return 0;
         }
+
 
 
         public List<Ucenik> DajSveUcenikeNaPredmetu()
@@ -61,6 +68,8 @@ namespace Ednevnik
             }
             return temp;
         }
+
+
 
         public List<Razred> DajSveRazredeNaPredmetu()
         {
