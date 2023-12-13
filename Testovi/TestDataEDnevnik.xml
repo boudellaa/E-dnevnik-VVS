@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestData>
+	<TestCase>
+		<Ime>John</Ime>
+		<Prezime>D</Prezime>
+		<Password>test123</Password>
+	</TestCase>
+	<TestCase>
+		<Ime>Alice</Ime>
+		<Prezime>J</Prezime>
+		<Password>pass456</Password>
+	</TestCase>
+	<TestCase>
+		<Ime>Bob</Ime>
+		<Prezime>S</Prezime>
+		<Password>secret789</Password>
+	</TestCase>
+</TestData>

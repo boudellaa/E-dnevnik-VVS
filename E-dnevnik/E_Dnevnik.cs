@@ -176,6 +176,10 @@ namespace Ednevnik
         }
         public void DajOcjene(Ucenik ucenik)
         {
+            if (ucenik == null || Ucenici.All(u => u != ucenik))
+            {
+                throw new Exception("Nepoznat učenik");
+            }
             var random = new Random();
             foreach (var predmet in Predmeti)
             {
