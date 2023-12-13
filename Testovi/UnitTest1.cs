@@ -21,7 +21,7 @@ namespace Testovi
 		private XmlReaderSettings settings = new XmlReaderSettings();
 		
 
-		private E_Dnevnik E_Dnevnik;
+		private E_Dnevnik E_Dnevnik;   
 		private Ucenik ucenik;
 		private Razred razred;
 		private Predmet predmet;
@@ -36,7 +36,6 @@ namespace Testovi
 			E_Dnevnik.DodajRazred(razred);
 			E_Dnevnik.DodajUcenikaURazred(ucenik, razred);
 			E_Dnevnik.SpojiRazredIPredmet(razred, predmet);
-
 		}
 
 		// Prosjek na predmetu
@@ -46,8 +45,6 @@ namespace Testovi
 			Test1Initialize();
 			double zbir = 0;
 			Random rnd = new Random();
-			
-			
 			for(int i = 1; i <= 10; i++)
 			{
 				int ocjena = rnd.Next(1, 5);
@@ -63,7 +60,7 @@ namespace Testovi
 		public static IEnumerable<object[]> ReadXML()
 		{
 			
-			var path = "C:\\Users\\Nedim Krupalija\\E-dnevnik-VVS\\Testovi\\TestData.xml";
+			var path = "TestData.xml";
 			var xml = XDocument.Load(path);
 			List<object[]> predmeti = new List<object[]>();
 			IEnumerable<XElement> lista = xml.Root.Descendants("predmet");
@@ -192,8 +189,6 @@ namespace Testovi
 			Assert.AreEqual("Test", ucenik.Sifra);
 			Assert.AreEqual("Test", ucenik.KorisnickoIme);
 			Assert.AreEqual(ocekivano, ucenik.DajUkupanProsjekUcenika());
-
-			
 		}
 	}
 }
