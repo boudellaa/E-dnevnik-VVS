@@ -25,8 +25,11 @@ namespace Ednevnik
         {
             Double temp = 0;
             int brojac = 0;
-            foreach(var x in Ucenici)
+            List<double> prosjekRazreda = new List<double>();
+            foreach (var x in Ucenici)
             {
+                temp = 0;
+                brojac = 0;
                 foreach(var ocjena in x.Ocjene)
                 {
                     if (!Ocjena.ValidirajOcjenu(ocjena.Vrijednost))
@@ -40,9 +43,10 @@ namespace Ednevnik
 					}
 
                 }
+                prosjekRazreda.Add(temp/brojac);
             }
             if (brojac == 0) throw new Exception("Razred nema ocjena!"); 
-            return temp/brojac;
+            return prosjekRazreda.Average();
         }
 
         public void DodajUcenika(Ucenik ucenik)
