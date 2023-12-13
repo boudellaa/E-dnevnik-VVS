@@ -24,7 +24,10 @@ namespace Ednevnik
 
         public Razred Razred { get; set; }
 
-       
+       public Ucenik()
+        {
+
+        }
         
         public Ucenik( string ime, string prezime, string korisnickoIme, string sifra)
         {    
