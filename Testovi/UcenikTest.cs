@@ -1,9 +1,11 @@
 
 using E_dnevnik;
 using Ednevnik;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.Xml.Linq;
@@ -12,7 +14,7 @@ using System.Xml.Serialization;
 namespace Testovi
 {
 	[TestClass]
-	public class UnitTest1
+	public class UcenikTest
 	{
 		private TestContext testContextInstance;
 		public TestContext TestContext
@@ -29,7 +31,7 @@ namespace Testovi
 		private Predmet predmet;
 
 		[TestInitialize]
-		public void Test1Initialize()
+		public void TestInitialize()
 		{
 			E_Dnevnik = new E_Dnevnik();
 			predmet = new Predmet("TestPredmet");
@@ -42,9 +44,9 @@ namespace Testovi
 
 		// Prosjek na predmetu
 		[TestMethod]
-		public void TestMethod1()
+		public void DajProsjekUcenikaNaPredmetu_TacanProsjek()
 		{
-			Test1Initialize();
+			TestInitialize();
 			double zbir = 0;
 			Random rnd = new Random();
 			for(int i = 1; i <= 10; i++)
@@ -94,7 +96,7 @@ namespace Testovi
 
 		[DynamicData(nameof(PredmetiXML))]
 		[TestMethod]
-		public void TestMethod2(string imePredmeta)
+		public void DajMojePredmete_PostojiDodanPredmet(string imePredmeta)
 		{
 		
 			
@@ -116,9 +118,9 @@ namespace Testovi
 
 		//Ucenik nema ocjena nikako
 		[TestMethod]
-		public void test3()
+		public void DajProsjekUcenika_NemaProsjeka()
 		{
-			Test1Initialize();
+			TestInitialize();
 			Assert.AreEqual(0, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
 			Assert.AreEqual(0, ucenik.DajUkupanProsjekUcenika());
 		}
@@ -126,19 +128,12 @@ namespace Testovi
 		//Test ocjena nije validna
 		[TestMethod]
 		[ExpectedException(typeof(Exception))]
-		public void test4()
+		public void ValidirajOcjenu_Exception()
 		{
 			var ocjena = new Ocjena(55, new UcenikDummy(), new Predmet("Test"), DateTime.Now);
-		}
-
-
-		// Ukupan prosjek ucenika ddt js/csv mozda
-		[TestMethod]
-		public void test5()
-		{
-			Test1Initialize();
 			
 		}
+
 
 		public static IEnumerable<object[]> OcjeneData
 		{
@@ -184,9 +179,9 @@ namespace Testovi
 		//test ukupan prosjek ucenika
 		[TestMethod]
 		[DynamicData(nameof(OcjeneData))]
-		public void test6(List<Ocjena> ocjene, double ocekivano)
+		public void DajUkupanProsjekUcenika_TacanProsjek(List<Ocjena> ocjene, double ocekivano)
 		{
-			Test1Initialize();
+			TestInitialize();
 			ucenik.Ocjene = ocjene;
 			Assert.AreEqual("Test", ucenik.Ime);
 			Assert.AreEqual("Test", ucenik.Prezime);
@@ -194,5 +189,43 @@ namespace Testovi
 			Assert.AreEqual("Test", ucenik.KorisnickoIme);
 			Assert.AreEqual(ocekivano, ucenik.DajUkupanProsjekUcenika());
 		}
+
+		public static IEnumerable<object[] > ReadJSON()
+		{
+			List<object[]> ocjene = new List<object[]>();
+			string jsonContent = File.ReadAllText("../../../OcjeneUcenik.json");
+			List<String> listaStringOcjena = JsonConvert.DeserializeObject<List<String>>(jsonContent);
+			foreach (var o in listaStringOcjena)
+			{
+				ocjene.Add(new object[]
+				{
+					o
+				}
+
+				) ;
+			}
+			
+			return ocjene;
+		}
+
+	
+
+
+	[TestMethod]
+	[DynamicData(nameof(ReadJSON), DynamicDataSourceType.Method)]
+	public void DajOcjeneIzPredmeta_PostojiOcjenaUPredmetu(String stringOcjene)
+	{
+		TestInitialize();
+			var ocjena = new Ocjena(Convert.ToInt32(stringOcjene), ucenik, predmet, DateTime.Now);
+			ucenik.Ocjene.Add(ocjena);
+
+			Assert.IsTrue(ucenik.DajOcjeneIzPredmeta(predmet).Contains(ocjena));
+		
 	}
+
+}
+
+	
+
+
 }
