@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<razred>
+	<ucenik>
+		<ocjene>
+			<ocjena>
+				<vrijednost>3</vrijednost>
+			</ocjena>
+			<ocjena>
+				<vrijednost>4</vrijednost>
+			</ocjena>
+			<ocjena>
+				<vrijednost>3</vrijednost>
+			</ocjena>
+			<ocjena>
+				<vrijednost>5</vrijednost>
+			</ocjena>
+		</ocjene>
+	</ucenik>
+</razred>
