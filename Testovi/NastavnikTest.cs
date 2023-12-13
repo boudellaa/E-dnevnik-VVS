@@ -70,31 +70,31 @@ namespace Testovi
             Assert.IsTrue(ucenik.Komentari.Any(k => k.Opis == opis));
         }
 
-        public static IEnumerable<object[]> ReadJSONUcenika()
-        {
-            List<object[]> ucenici = new List<object[]>();
-            string jsonContent = File.ReadAllText("../../../ucenici.json");
-            List<Ucenik> ucenikLista = JsonConvert.DeserializeObject<List<Ucenik>>(jsonContent);
-            foreach(Ucenik ucenik in ucenikLista)
-            {
-                ucenici.Add(new object[]
-                {
-                    ucenik
-                });
-            }
-            return ucenici;
-        }
+		public static IEnumerable<object[]> ReadJSONUcenika()
+		{
+			List<object[]> ucenici = new List<object[]>();
+			string jsonContent = File.ReadAllText("../../../ucenici.json");
+			List<Ucenik> ucenikLista = JsonConvert.DeserializeObject<List<Ucenik>>(jsonContent);
+			foreach (Ucenik ucenik in ucenikLista)
+			{
+				ucenici.Add(new object[]
+				{
+					ucenik
+				});
+			}
+			return ucenici;
+		}
 
-        [TestMethod]
-        [DynamicData(nameof(ReadJSONUcenika),DynamicDataSourceType.Method)]
-        public void Dohvati_SveNastavnikoveUcenike(Ucenik u)
-        {
-            razred.Ucenici.Add(u);
-            List<Ucenik> nastavnikoviUcenici = nastavnik.DajSveUcenikeNastavnika();
-            Assert.IsTrue(nastavnikoviUcenici.Any(uc => uc.Ime==u.Ime && uc.KorisnickoIme==u.KorisnickoIme));
-        }
+		[TestMethod]
+		[DynamicData(nameof(ReadJSONUcenika), DynamicDataSourceType.Method)]
+		public void Dohvati_SveNastavnikoveUcenike(Ucenik u)
+		{
+			razred.Ucenici.Add(u);
+			List<Ucenik> nastavnikoviUcenici = nastavnik.DajSveUcenikeNastavnika();
+			Assert.IsTrue(nastavnikoviUcenici.Any(uc => uc.Ime == u.Ime && uc.KorisnickoIme == u.KorisnickoIme));
+		}
 
-        [TestMethod]
+		[TestMethod]
         [ExpectedException(typeof(Exception))]
         public void Dohvati_PrazanRazred_BacaException()
         {

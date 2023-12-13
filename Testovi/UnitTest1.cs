@@ -1,7 +1,9 @@
 
 using E_dnevnik;
 using Ednevnik;
+using System.Diagnostics;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.Xml.Linq;
@@ -59,8 +61,8 @@ namespace Testovi
 		
 		public static IEnumerable<object[]> ReadXML()
 		{
-			
-			var path = "TestData.xml";
+		
+			var path = "../../../TestData.xml";
 			var xml = XDocument.Load(path);
 			List<object[]> predmeti = new List<object[]>();
 			IEnumerable<XElement> lista = xml.Root.Descendants("predmet");
@@ -94,6 +96,8 @@ namespace Testovi
 		[TestMethod]
 		public void TestMethod2(string imePredmeta)
 		{
+		
+			
 			E_Dnevnik = new E_Dnevnik();
 			Console.WriteLine("PREDMET: "+imePredmeta);
 			
