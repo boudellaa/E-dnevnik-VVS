@@ -55,7 +55,7 @@ namespace Testovi
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void UpisiUceniku_NevalidnuOcjenu()
+        public void UpisiUceniku_NevalidnuOcjenu_BacaException()
         {
             int vrijednost = 6;
             nastavnik.UpisiOcjenu(ucenik, vrijednost);
@@ -87,7 +87,7 @@ namespace Testovi
 
         [TestMethod]
         [DynamicData(nameof(ReadJSONUcenika),DynamicDataSourceType.Method)]
-        public void SviUceniciNastavnika(Ucenik u)
+        public void Dohvati_SveNastavnikoveUcenike(Ucenik u)
         {
             razred.Ucenici.Add(u);
             List<Ucenik> nastavnikoviUcenici = nastavnik.DajSveUcenikeNastavnika();
@@ -145,7 +145,7 @@ namespace Testovi
         }
 
         [TestMethod]
-        public void Aa()
+        public void Prisustvo_UspjesnoZabiljezeno()
         {
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
