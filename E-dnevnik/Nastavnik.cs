@@ -8,15 +8,11 @@ using System.Threading.Tasks;
 
 namespace Ednevnik
 {
-
     public class Nastavnik
     {
-
-		
         public string Ime { get; set; }
 
         public string Prezime { get; set; }
-
 
         public string KorisnickoIme { get; set; }
 
@@ -24,18 +20,12 @@ namespace Ednevnik
 
         public Predmet Predmet {  get; set; }
 
-		
-
         public Nastavnik(string ime, string prezime,string korisnickoIme, string sifra)
         {
-			
             Ime = ime;
             Prezime = prezime;
-            
             KorisnickoIme = korisnickoIme;
             Sifra = sifra;
-			
-
         }
 
 		public void UpisiOcjenu(Ucenik ucenik, int vrijednost)
@@ -46,7 +36,6 @@ namespace Ednevnik
             }
 			catch (Exception ex)
 			{
-
 				throw new Exception(ex.Message);
 			}
 			if (ucenik == null)
@@ -54,7 +43,6 @@ namespace Ednevnik
 			ucenik.Ocjene.Add(new Ocjena(vrijednost, ucenik, Predmet, DateTime.Now));
 		}
 		
-
 		public void NoviKomentar(Ucenik ucenik, string opis)
 		{
 			if (opis == null) throw new Exception("Komentar ne moze biti prazan!");
@@ -70,17 +58,17 @@ namespace Ednevnik
 			{
 				zapis.Add(new Tuple<string, string>(ucenik.Ime, ucenik.Prezime));
 			}
-			using (var sr = new StreamWriter("prisustvo.csv", false, Encoding.UTF8))
+            using (var sr = new StreamWriter("../../../../E-dnevnik/prisustvo.csv", false, Encoding.UTF8))
 			{
 				using (var csv = new CsvWriter(sr, CultureInfo.InvariantCulture))
 				{
-					csv.WriteRecords(zapis);
+                    csv.WriteField("item1");
+                    csv.WriteField("item2");
+                    csv.NextRecord();
+                    csv.WriteRecords(zapis);
 				}
 			}
-			
-			
 		}
-		
 		public List<Ucenik> DajSveUcenikeNastavnika()
 		{
 			foreach(var x in Predmet.Razredi_Predmeti)
@@ -93,26 +81,12 @@ namespace Ednevnik
 				}
 			}
 			throw new Exception("Nastavnik nema ucenika!");
-
 		}
 		
 		public Double IzracunajProsjekRazreda()
         {
-			try
-			{
 				var ucenici = Predmet.DajSveUcenikeNaPredmetu();
 				return ucenici.Average(u => u.DajUkupanProsjekUcenika());
-			}
-			catch (Exception ex)
-			{
-
-				throw new Exception(ex.Message);
-			}
-            
         }
-		
-       
-		
     }
-
 }

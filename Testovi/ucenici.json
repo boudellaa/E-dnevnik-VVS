@@ -1,0 +1,20 @@
+﻿[
+    {
+      "Ime": "John",
+      "Prezime": "Doe",
+      "KorisnickoIme": "john_doe",
+      "Sifra": "password1"
+    },
+    {
+      "Ime": "Jane",
+      "Prezime": "Smith",
+      "KorisnickoIme": "jane_smith",
+      "Sifra": "password2"
+    },
+    {
+      "Ime": "Bob",
+      "Prezime": "Johnson",
+      "KorisnickoIme": "bob_johnson",
+      "Sifra": "password3"
+    }
+]

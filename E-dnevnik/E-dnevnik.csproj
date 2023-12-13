@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.CodeCoverage" Version="17.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestResults\" />
+  </ItemGroup>
+
 </Project>

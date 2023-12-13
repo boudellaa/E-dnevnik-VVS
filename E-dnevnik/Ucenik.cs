@@ -24,8 +24,11 @@ namespace Ednevnik
 
         public Razred Razred { get; set; }
 
-       
+       public Ucenik()
+        {
 
+        }
+        
         public Ucenik( string ime, string prezime, string korisnickoIme, string sifra)
         {    
             Ime = ime;
@@ -33,7 +36,7 @@ namespace Ednevnik
             KorisnickoIme = korisnickoIme;
             Sifra = sifra;
             Ocjene = new List<Ocjena>();
-            
+         
         }
         public Ucenik(string ime, string prezime, string korisnickoIme, string sifra, Razred razred)
         {
@@ -44,6 +47,10 @@ namespace Ednevnik
             Ocjene = new List<Ocjena>();
             Komentari = new List<Komentar>();
             Razred = razred;
+        }
+        public override string ToString()
+        {
+            return $"Ime: {Ime}, Prezime: {Prezime}, KorisnickoIme: {KorisnickoIme}, Sifra: {Sifra}";
         }
 
         public List<Ocjena> DajSortiraneOcjenePoVrijednosti(List<Ocjena> ocjene)
