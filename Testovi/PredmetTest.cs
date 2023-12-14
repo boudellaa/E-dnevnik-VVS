@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace Testovi
 {
     [TestClass]
-    public class UnitTest2
+    public class PredmetTest
     {
         private E_Dnevnik E_Dnevnik;
         private Ucenik ucenik;
@@ -28,9 +28,9 @@ namespace Testovi
             E_Dnevnik.SpojiNastavnikPredmet(nastavnik, predmet);
         }
 
-        // relaciona veza nastavnik-predmet
+        
         [TestMethod]
-        public void TestMethod1()
+        public void SpojiNastavnikPredmet_ProvjeraVezeNastavnikPredmet()
         {
             Test2Initialize();
 
@@ -38,9 +38,9 @@ namespace Testovi
             Assert.AreEqual(predmet, nastavnik.Predmet);
         }
 
-        // dohvacanje svih razreda i ucenika na predmetu
+       
         [TestMethod]
-        public void TestMethod2()
+        public void DajSveRazredeIUcenike_ProvjeraRazredaIUcenika()
         {
             Test2Initialize();
             var razredi = predmet.DajSveRazredeNaPredmetu();
@@ -50,9 +50,9 @@ namespace Testovi
             CollectionAssert.AreEqual(razred.Ucenici, ucenici);
         }
 
-        // azuriranje postojeceg nastavnika sa zamjenskim objektom
+        
         [TestMethod]
-        public void TestMethod3()
+        public void DodijeliNastavnika_NastavnikUspjesnoDodijeljen()
         {
             Test2Initialize();
             var mockNastavnik = new Mock<Nastavnik>("ime", "prezime", "korisnickoIme", "sifra").Object;
@@ -63,9 +63,8 @@ namespace Testovi
         }
 
 
-        // prosjek predmeta i citanje iz json datoteke
         [TestMethod]
-        public void TestMethod4()
+        public void DajProsjekPredmeta_VracaProsjek()
         {
             Test2Initialize();
 
@@ -87,9 +86,8 @@ namespace Testovi
 
 
 
-        // test prosjek predmeta kada nema ucenika
         [TestMethod]
-        public void TestMethod5()
+        public void DajProsjekPredmeta_VracaProsjek2()
         {
             
             predmet.Razredi_Predmeti.Clear(); 
@@ -98,10 +96,9 @@ namespace Testovi
         }
 
 
-        // dodjela null nastavnika
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestMethod6()
+        public void DodijeliNastavnika_Izuzetak()
         {
             var predmet = new Predmet("TestPredmet");
 
@@ -109,9 +106,9 @@ namespace Testovi
 
         }
 
-        // test prosjek razreda
+      
         [TestMethod]
-        public void TestMethod7()
+        public void DajProsjekPredmeta_VracaProsjek3()
         {
             Test2Initialize();
 
