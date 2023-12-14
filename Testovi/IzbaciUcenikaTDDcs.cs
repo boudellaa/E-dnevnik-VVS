@@ -32,5 +32,16 @@ namespace Testovi
         {
             razred.IzbaciUcenika(ucenici[2]);
         }
+
+        [TestMethod]
+        public void IzbaciUcenika_UspjesnoIzbacenUcenik()
+        {
+            Assert.IsTrue(razred.Ucenici.Contains(ucenici[1]));
+            razred.IzbaciUcenika(ucenici[1]);
+
+
+            Assert.IsTrue(!razred.Ucenici.Contains(ucenici[1]));
+        }
+
     }
 }
