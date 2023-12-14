@@ -23,9 +23,9 @@ namespace Testovi
 			set { testContextInstance = value; }
 		}
 		private XmlReaderSettings settings = new XmlReaderSettings();
-		
 
-		private E_Dnevnik E_Dnevnik;   
+
+		private E_Dnevnik E_Dnevnik;
 		private Ucenik ucenik;
 		private Razred razred;
 		private Predmet predmet;
@@ -49,36 +49,36 @@ namespace Testovi
 			TestInitialize();
 			double zbir = 0;
 			Random rnd = new Random();
-			for(int i = 1; i <= 10; i++)
+			for (int i = 1; i <= 10; i++)
 			{
 				int ocjena = rnd.Next(1, 5);
 				zbir += ocjena;
 				ucenik.Ocjene.Add(new Ocjena(ocjena, ucenik, predmet, DateTime.Now));
 			}
 
-			Assert.AreEqual(zbir/10, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
+			Assert.AreEqual(zbir / 10, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
 
 		}
 
-		
+
 		public static IEnumerable<object[]> ReadXML()
 		{
-		
+
 			var path = "../../../TestData.xml";
 			var xml = XDocument.Load(path);
 			List<object[]> predmeti = new List<object[]>();
 			IEnumerable<XElement> lista = xml.Root.Descendants("predmet");
-			foreach( XElement element in lista)
+			foreach (XElement element in lista)
 			{
 				predmeti.Add(new object[]
 				{
 					element.Value
-				}); 
+				});
 			}
 
-			
-				
-			
+
+
+
 			return predmeti;
 		}
 
@@ -90,7 +90,7 @@ namespace Testovi
 			}
 		}
 
-		
+
 
 		// DDT TEST
 
@@ -98,17 +98,17 @@ namespace Testovi
 		[TestMethod]
 		public void DajMojePredmete_PostojiDodanPredmet(string imePredmeta)
 		{
-		
-			
+
+
 			E_Dnevnik = new E_Dnevnik();
-			Console.WriteLine("PREDMET: "+imePredmeta);
-			
+			Console.WriteLine("PREDMET: " + imePredmeta);
+
 			razred = new Razred("TestRazred");
-			ucenik = new Ucenik("Test", "Test", "Test", "Test",razred);
+			ucenik = new Ucenik("Test", "Test", "Test", "Test", razred);
 			E_Dnevnik.DodajRazred(razred);
 			E_Dnevnik.DodajUcenikaURazred(ucenik, razred);
 
-			
+
 			predmet = new Predmet(imePredmeta);
 			E_Dnevnik.SpojiRazredIPredmet(razred, predmet);
 
@@ -131,7 +131,7 @@ namespace Testovi
 		public void ValidirajOcjenu_Exception()
 		{
 			var ocjena = new Ocjena(55, new UcenikDummy(), new Predmet("Test"), DateTime.Now);
-			
+
 		}
 
 
@@ -190,10 +190,10 @@ namespace Testovi
 			Assert.AreEqual(ocekivano, ucenik.DajUkupanProsjekUcenika());
 		}
 
-		public static IEnumerable<object[] > ReadJSON()
+		public static IEnumerable<object[]> ReadJSON()
 		{
 			List<object[]> ocjene = new List<object[]>();
-			string jsonContent = File.ReadAllText("../../../OcjeneUcenik.json");
+			string jsonContent = File.ReadAllText("../../../Ocjene.json");
 			List<String> listaStringOcjena = JsonConvert.DeserializeObject<List<String>>(jsonContent);
 			foreach (var o in listaStringOcjena)
 			{
@@ -202,30 +202,30 @@ namespace Testovi
 					o
 				}
 
-				) ;
+				);
 			}
-			
+
 			return ocjene;
 		}
 
-	
 
 
-	[TestMethod]
-	[DynamicData(nameof(ReadJSON), DynamicDataSourceType.Method)]
-	public void DajOcjeneIzPredmeta_PostojiOcjenaUPredmetu(String stringOcjene)
-	{
-		TestInitialize();
+
+		[TestMethod]
+		[DynamicData(nameof(ReadJSON), DynamicDataSourceType.Method)]
+		public void DajOcjeneIzPredmeta_PostojiOcjenaUPredmetu(String stringOcjene)
+		{
+			TestInitialize();
 			var ocjena = new Ocjena(Convert.ToInt32(stringOcjene), ucenik, predmet, DateTime.Now);
 			ucenik.Ocjene.Add(ocjena);
 
 			Assert.IsTrue(ucenik.DajOcjeneIzPredmeta(predmet).Contains(ocjena));
-		
+
+		}
+
 	}
 
-}
 
-	
 
 
 }

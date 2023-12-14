@@ -10,18 +10,24 @@ using System.Threading.Tasks;
 
 namespace Ednevnik
 {
-    public class E_Dnevnik
-    {
-        
-        public List<Razred> Razredi { get; set; }
+	public class E_Dnevnik
+	{
 
-        public List<Ucenik> Ucenici { get; set; }
+		public List<Razred> Razredi { get; set; }
 
-        public List<Nastavnik> Nastavnici { get; set; }
+		public List<Ucenik> Ucenici { get; set; }
 
-        public List<Predmet> Predmeti { get; set; }
+		public List<Nastavnik> Nastavnici { get; set; }
 
-		private  byte[] salt = new byte[64];
+		public List<Predmet> Predmeti { get; set; }
+
+		private const int _saltSize = 16; // 128 bits
+		private const int _keySize = 32; // 256 bits
+		private const int _iterations = 50000;
+		private static readonly HashAlgorithmName _algorithm = HashAlgorithmName.SHA256;
+
+		private const char segmentDelimiter = ':';
+
 
 		public E_Dnevnik()
 		{
@@ -38,81 +44,81 @@ namespace Ednevnik
 			new Razred("I-6"),
 		 };
 
-			Ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", "123456"),
-			new Ucenik("Nedim", "Krupalija", "neda", "12345") ,
-			new Ucenik("John", "Doe", "john", "12345"),
+			Ucenici = new List<Ucenik> { new Ucenik("Kenan", "Dizdarević", "kenankd", HashPassword("123456")),
+			new Ucenik("Nedim", "Krupalija", "neda", HashPassword("12345")) ,
+			new Ucenik("John", "Doe", "john", HashPassword("12345")),
 
-			new Ucenik("Vitoria","Lilllie","Jenna","8419"),
+			new Ucenik("Vitoria","Lilllie","Jenna",HashPassword("12345")),
 
-			new Ucenik("Xylina","Zora","Michaelina","7058"),
+			new Ucenik("Xylina","Zora","Michaelina",HashPassword("12345")),
 
-			new Ucenik("Florinda","Kipp","Antonina","6057"),
+			new Ucenik("Florinda","Kipp","Antonina",HashPassword("12345")),
 
-			new Ucenik("Didi","Aindrea","Sybila","5706"),
+			new Ucenik("Didi","Aindrea","Sybila",HashPassword("12345")),
 
-			new Ucenik("Nathalie","Corina","Eilis","1288"),
+			new Ucenik("Nathalie","Corina","Eilis",HashPassword("12345")),
 
-			new Ucenik("Betteann","Bird","Margalit","7202"),
+			new Ucenik("Betteann","Bird","Margalit",HashPassword("12345")),
 
-			new Ucenik("Clarinda","Edith","Lanny","8575"),
+			new Ucenik("Clarinda","Edith","Lanny",HashPassword("12345")),
 
-			new Ucenik("Fawne","Britteny","Stacee","4350"),
+			new Ucenik("Fawne","Britteny","Stacee",HashPassword("12345")),
 
-			new Ucenik("Jada","Catlaina","Yovonnda","6523"),
+			new Ucenik("Jada","Catlaina","Yovonnda",HashPassword("12345")),
 
-			new Ucenik("Amity","Randi","Lenora","4510"),
+			new Ucenik("Amity","Randi","Lenora",HashPassword("12345")),
 
-			new Ucenik("Kayley","Meredithe","Concettina","2887"),
+			new Ucenik("Kayley","Meredithe","Concettina",HashPassword("12345")),
 
-			new Ucenik("Luelle","Rosie","Godiva","8832"),
+			new Ucenik("Luelle","Rosie","Godiva",HashPassword("12345")),
 
-			new Ucenik("Emmaline","Zena","Deedee","2726"),
+			new Ucenik("Emmaline","Zena","Deedee",HashPassword("12345")),
 
-			new Ucenik("Audre","Odetta","Frank","274"),
+			new Ucenik("Audre","Odetta","Frank",HashPassword("12345")),
 
-			new Ucenik("Mariann","Giulia","Allyn","6965"),
+			new Ucenik("Mariann","Giulia","Allyn",HashPassword("12345")),
 
-			new Ucenik("Clarette","Colline","Rae","8886"),
+			new Ucenik("Clarette","Colline","Rae",HashPassword("12345")),
 
-			new Ucenik("Henrieta","Suzette","Nady","328"),
+			new Ucenik("Henrieta","Suzette","Nady",HashPassword("12345")),
 
-			new Ucenik("Kathleen","Rozanna","Ki","891"),
+			new Ucenik("Kathleen","Rozanna","Ki",HashPassword("12345")),
 
-			new Ucenik("Andy","Constantine","Tildy","3189"),
+			new Ucenik("Andy","Constantine","Tildy",HashPassword("12345")),
 
-			new Ucenik("Klarika","Sileas","Bernetta","5089"),
+			new Ucenik("Klarika","Sileas","Bernetta",HashPassword("12345")),
 
-			new Ucenik("Juditha","Laure","Fifine","7055"),
+			new Ucenik("Juditha","Laure","Fifine",HashPassword("12345")),
 
-			new Ucenik("Cybil","Lilith","Pearla","2816"),
+			new Ucenik("Cybil","Lilith","Pearla",HashPassword("12345")),
 
-			new Ucenik("Ines","Jazmin","Fifine","2634"),
+			new Ucenik("Ines","Jazmin","Fifine",HashPassword("12345")),
 
-			new Ucenik("Mariele","Kyrstin","Shena","9563"),
+			new Ucenik("Mariele","Kyrstin","Shena",HashPassword("12345")),
 
-			new Ucenik("Tommy","Robinette","Odille","4401"),
+			new Ucenik("Tommy","Robinette","Odille",HashPassword("12345")),
 
-			new Ucenik("Andi","Brooke","Merilee","2423"),
+			new Ucenik("Andi","Brooke","Merilee",HashPassword("12345")),
 
-			new Ucenik("Abigael","Pen","Shelly","1057"),
+			new Ucenik("Abigael","Pen","Shelly",HashPassword("12345")),
 
-			new Ucenik("Moyna","Kellia","Melesa","1547"),
+			new Ucenik("Moyna","Kellia","Melesa",HashPassword("12345")),
 
-			new Ucenik("Wendeline","Allix","Lethia","1010"),
+			new Ucenik("Wendeline","Allix","Lethia",HashPassword("12345")),
 
-			new Ucenik("Dion","Lindy","Rora","5244")
+			new Ucenik("Dion","Lindy","Rora",HashPassword("12345"))
 
 
 
 			};
 			Nastavnici = new List<Nastavnik> {
-				new Nastavnik("Berin", "Karahodžić", "bera", "12345"),
-				new Nastavnik("Nedim", "Hošić", "hosa", "loslos") ,
-				new Nastavnik("Ali", "Boudellaa", "buda", "12345"),
-				new Nastavnik("Mujo", "Mujic", "mujo", "12345"),
-				new Nastavnik("Haso", "Hasic", "haso", "12345"),
-				new Nastavnik("Buba", "Corelli", "kora", "12345"),
-				new Nastavnik("Halid", "Beslic", "halid", "12345")
+				new Nastavnik("Berin", "Karahodžić", "bera",HashPassword("12345")),
+				new Nastavnik("Nedim", "Hošić", "hosa", HashPassword("12345")) ,
+				new Nastavnik("Ali", "Boudellaa", "buda", HashPassword("12345")),
+				new Nastavnik("Mujo", "Mujic", "mujo", HashPassword("12345")),
+				new Nastavnik("Haso", "Hasic", "haso", HashPassword("12345")),
+				new Nastavnik("Buba", "Corelli", "kora", HashPassword("12345")),
+				new Nastavnik("Halid", "Beslic", "halid", HashPassword("12345"))
 
 			};
 			Predmeti = new List<Predmet>{
@@ -149,66 +155,67 @@ namespace Ednevnik
 
 			}
 
-            foreach (var ucenik in Ucenici)
-            {
-                DajOcjene(ucenik);
-            }
+			foreach (var ucenik in Ucenici)
+			{
+				DajOcjene(ucenik);
+			}
 
-        }
+		}
 
-        public Nastavnik? ValidirajLoginNastavnika(E_Dnevnik EDnevnik, String username, String password)
-        {
-            Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == username && nastavnik.Sifra == password);
-            if (nastavnik != null)
-            {
-                return nastavnik;
-            }
-            return null;
-        }
+		public Nastavnik? ValidirajLoginNastavnika(E_Dnevnik EDnevnik, String username, String password)
+		{
+			Nastavnik? nastavnik = EDnevnik.Nastavnici.SingleOrDefault(nastavnik => nastavnik.KorisnickoIme == username && VerifyPassword(password, nastavnik.Sifra));
 
-        public Ucenik? ValidirajLoginUcenika(E_Dnevnik EDnevnik, String username, String password)
-        {
-            Ucenik? ucenik = EDnevnik.Ucenici.SingleOrDefault(ucenik => ucenik.KorisnickoIme == username && ucenik.Sifra == password);
-            if (ucenik != null)
-            {
-                return ucenik;
-            }
-            return null;
-        }
-        public void DajOcjene(Ucenik ucenik)
-        {
-            if (ucenik == null || Ucenici.All(u => u != ucenik))
-            {
-                throw new Exception("Nepoznat učenik");
-            }
-            var random = new Random();
-            foreach (var predmet in Predmeti)
-            {
-                bool ucenikImaPredmet = ucenik.Razred.Razredi_Predmeti.Any(rp => rp.Predmet == predmet);
+			if (nastavnik != null)
+			{
+				return nastavnik;
+			}
+			return null;
+		}
 
-                if (!ucenikImaPredmet)
-                {
-                    continue;
-                }
-                int brojOcjena = random.Next(5, 11);
-                for (int i = 0; i < brojOcjena; i++)
-                {
-                    int ocjena = random.Next(1, 6);
-                    var datum = NasumicniDatum(random);
-                    ucenik.Ocjene.Add(new Ocjena(ocjena, ucenik, predmet, datum));
-                }
-            }
-        }
+		public Ucenik? ValidirajLoginUcenika(E_Dnevnik EDnevnik, String username, String password)
+		{
+			Ucenik? ucenik = EDnevnik.Ucenici.SingleOrDefault(ucenik => ucenik.KorisnickoIme == username && VerifyPassword(password, ucenik.Sifra));
+			if (ucenik != null)
+			{
+				return ucenik;
+			}
+			return null;
+		}
+		public void DajOcjene(Ucenik ucenik)
+		{
+			if (ucenik == null || Ucenici.All(u => u != ucenik))
+			{
+				throw new Exception("Nepoznat učenik");
+			}
+			var random = new Random();
+			foreach (var predmet in Predmeti)
+			{
+				bool ucenikImaPredmet = ucenik.Razred.Razredi_Predmeti.Any(rp => rp.Predmet == predmet);
 
-        private DateTime NasumicniDatum(Random x)
-        {
-            DateTime start = new DateTime(2022, 9, 1);
-            DateTime end = new DateTime(2023, 6, 30);
-            int range = (end - start).Days;
-            return start.AddDays(x.Next(range));
-        }
+				if (!ucenikImaPredmet)
+				{
+					continue;
+				}
+				int brojOcjena = random.Next(5, 11);
+				for (int i = 0; i < brojOcjena; i++)
+				{
+					int ocjena = random.Next(1, 6);
+					var datum = NasumicniDatum(random);
+					ucenik.Ocjene.Add(new Ocjena(ocjena, ucenik, predmet, datum));
+				}
+			}
+		}
 
-        public void SpojiRazredIPredmet(Razred razred, Predmet predmet)
+		private DateTime NasumicniDatum(Random x)
+		{
+			DateTime start = new DateTime(2022, 9, 1);
+			DateTime end = new DateTime(2023, 6, 30);
+			int range = (end - start).Days;
+			return start.AddDays(x.Next(range));
+		}
+
+		public void SpojiRazredIPredmet(Razred razred, Predmet predmet)
 		{
 			var razred_predmet = new Razred_Predmet(razred, predmet);
 			razred.Razredi_Predmeti.Add(razred_predmet);
@@ -226,76 +233,86 @@ namespace Ednevnik
 			ucenik.Razred = razred;
 			razred.Ucenici.Add(ucenik);
 		}
-		
+
 		public void DodajRazred(Razred razred)
-        {
-            Razredi.Add(razred);
-            Console.WriteLine($"Razred {razred.Ime} dodan.");
-        }
-
-        public void PrikaziRazrede()
-        {
-            if (Razredi.Count == 0)
-            {
-                throw new InvalidOperationException("U školi nema razreda.");
-            }
-            
-            foreach (var razred in Razredi)
-            {
-                Console.WriteLine($"{razred.Ime}");
-            }
-        }
-
-        
-		
-        public String HashPassword(String password, out byte[] salt)
 		{
-               
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-            salt = RandomNumberGenerator.GetBytes(64);
-            if (password == "")
-            {
-                return "";
-            }
-            var hash = Rfc2898DeriveBytes.Pbkdf2(
-                Encoding.UTF8.GetBytes(password),
-                salt,
-                350000,
-                hashAlgorithm,
-                64);
+			Razredi.Add(razred);
+			Console.WriteLine($"Razred {razred.Ime} dodan.");
+		}
 
-            return Convert.ToHexString(hash);
-        }
+		public void PrikaziRazrede()
+		{
+			if (Razredi.Count == 0)
+			{
+				throw new InvalidOperationException("U školi nema razreda.");
+			}
 
-        public bool VerifyPassword(string password, string hash, byte[] salt)
-        {
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-            var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, 350000, hashAlgorithm, 64);
-            return CryptographicOperations.FixedTimeEquals(hashToCompare, Convert.FromHexString(hash));
-        }
+			foreach (var razred in Razredi)
+			{
+				Console.WriteLine($"{razred.Ime}");
+			}
+		}
 
 
-        public string RegistrujUcenika(string ime, string prezime, string password)
-        {
-            string username = ime[0] + prezime;
-            if (username.Length > 10)
-                username = username.Substring(0, 10);
-            username = username + "1";
-            username = username.ToLower();
-            int br = 2;
-            while (Ucenici.Exists(u => u.KorisnickoIme == username))
-            {
-                username = username.Substring(0, username.Length - 1);
-                username = username + br.ToString();
-                br++;
-            }
-            var ucenik = new Ucenik((char.ToUpper(ime[0]) + ime.Substring(1).ToLower()), (char.ToUpper(prezime[0]) + prezime.Substring(1).ToLower()), username, password);
-            var random = new Random();
-            Ucenici.Add(ucenik);
-            DodajUcenikaURazred(ucenik, Razredi[random.Next(Razredi.Count - 1)]);
-            return username;
-        }
-    }
+
+		public String HashPassword(String input)
+		{
+			byte[] salt = RandomNumberGenerator.GetBytes(_saltSize);
+			byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
+				input,
+				salt,
+				_iterations,
+				_algorithm,
+				_keySize
+			);
+			return string.Join(
+				segmentDelimiter,
+				Convert.ToHexString(hash),
+				Convert.ToHexString(salt),
+				_iterations,
+				_algorithm
+			);
+		}
+
+		public bool VerifyPassword(string input, string hashString)
+		{
+			string[] segments = hashString.Split(segmentDelimiter);
+			byte[] hash = Convert.FromHexString(segments[0]);
+			byte[] salt = Convert.FromHexString(segments[1]);
+			int iterations = int.Parse(segments[2]);
+			HashAlgorithmName algorithm = new HashAlgorithmName(segments[3]);
+			byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(
+				input,
+				salt,
+				iterations,
+				algorithm,
+				hash.Length
+			);
+			return CryptographicOperations.FixedTimeEquals(inputHash, hash);
+		}
+
+
+		public string RegistrujUcenika(string ime, string prezime, string password)
+		{
+			string username = ime[0] + prezime;
+			if (username.Length > 10)
+				username = username.Substring(0, 10);
+			username = username + "1";
+			username = username.ToLower();
+			int br = 2;
+			while (Ucenici.Exists(u => u.KorisnickoIme == username))
+			{
+				username = username.Substring(0, username.Length - 1);
+				username = username + br.ToString();
+				br++;
+			}
+			var ucenik = new Ucenik((char.ToUpper(ime[0]) + ime.Substring(1).ToLower()), (char.ToUpper(prezime[0]) + prezime.Substring(1).ToLower()), username, HashPassword(password));
+			var random = new Random();
+			Ucenici.Add(ucenik);
+			DodajUcenikaURazred(ucenik, Razredi[random.Next(Razredi.Count - 1)]);
+			return username;
+		}
+	}
 
 
 
