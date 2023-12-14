@@ -250,13 +250,24 @@ namespace Ednevnik
 		
         public String HashPassword(String password, out byte[] salt)
 		{
-			salt = new byte[64];
-			return "";
-		}
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+            salt = RandomNumberGenerator.GetBytes(64);
+
+            var hash = Rfc2898DeriveBytes.Pbkdf2(
+                Encoding.UTF8.GetBytes(password),
+                salt,
+                350000,
+                hashAlgorithm,
+                64);
+
+            return Convert.ToHexString(hash);
+        }
 
         public bool VerifyPassword(string password, string hash, byte[] salt)
         {
-			return false;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+            var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, 350000, hashAlgorithm, 64);
+            return CryptographicOperations.FixedTimeEquals(hashToCompare, Convert.FromHexString(hash));
         }
 
 
