@@ -58,9 +58,12 @@ namespace Ednevnik
             }
 			ucenik.Razred = this;
 			Ucenici.Add(ucenik);   
-            
         }
 
+        public void IzbaciUcenika(Ucenik ucenik)
+        {
+            
+        }
         
         
     }
