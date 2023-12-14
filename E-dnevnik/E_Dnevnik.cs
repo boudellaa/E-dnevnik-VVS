@@ -248,7 +248,11 @@ namespace Ednevnik
 
         
 		
-        
+        public String HashPassword(String password, byte[] salt)
+		{
+			
+			return "";
+		}
 
 
 
