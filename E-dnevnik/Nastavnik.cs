@@ -47,6 +47,14 @@ namespace Ednevnik
 		{
 			if (opis == null) throw new Exception("Komentar ne moze biti prazan!");
 			if (ucenik == null) throw new Exception("Ucenik nije definisan!");
+			try
+			{
+				Komentar.ValidirajKomentar(opis);
+            }
+			catch (Exception e)
+			{
+				throw new Exception("Nevalidan komentar");
+			}
 			if (ucenik.Komentari == null) throw new Exception("Komentari ucenika nisu definisani!");
 			ucenik.Komentari.Add(new Komentar(this, ucenik, opis));
 		}

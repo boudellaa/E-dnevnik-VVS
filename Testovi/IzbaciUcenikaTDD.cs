@@ -19,8 +19,7 @@ namespace Testovi
         {
             ednevnik = new E_Dnevnik();
             razred = new Razred("Test");
-             ucenici = new List<Ucenik>() { new Ucenik("Test1", "Test1", "test", "test", razred), new Ucenik("test2", "test2", "test2", "test2", razred), new Ucenik("test3", "test3", "test3", "test3")};
-
+            ucenici = new List<Ucenik>() { new Ucenik("Test1", "Test1", "test", "test", razred), new Ucenik("test2", "test2", "test2", "test2", razred), new Ucenik("test3", "test3", "test3", "test3")};
             razred.DodajUcenika(ucenici[0]);
             razred.DodajUcenika(ucenici[1]);
             

@@ -158,8 +158,6 @@ namespace Testovi
             Setup();
             var username = eDnevnik.RegistrujUcenika(ime, prezime, password);
             var username2 = ime.Substring(0, 1) + prezime.ToLower() + "1";
-
-            // Assert
             Assert.IsNotNull(username);
             Assert.AreEqual(username, ime.Substring(0, 1).ToLower() + prezime.ToLower() + "1");
         }
