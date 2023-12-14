@@ -250,9 +250,13 @@ namespace Ednevnik
 		
         public String HashPassword(String password, out byte[] salt)
 		{
+               
             HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
             salt = RandomNumberGenerator.GetBytes(64);
-
+            if (password == "")
+            {
+                return "";
+            }
             var hash = Rfc2898DeriveBytes.Pbkdf2(
                 Encoding.UTF8.GetBytes(password),
                 salt,
