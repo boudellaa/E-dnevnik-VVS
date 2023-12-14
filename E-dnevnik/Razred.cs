@@ -62,7 +62,7 @@ namespace Ednevnik
 
         public void IzbaciUcenika(Ucenik ucenik)
         {
-            
+            if (!this.Ucenici.Contains(ucenik)) throw new Exception();
         }
         
         
