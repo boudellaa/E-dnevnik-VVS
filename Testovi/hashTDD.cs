@@ -20,9 +20,23 @@ namespace Testovi
 
         }
         [TestMethod]
-        public void HashPassword_ReturnCorrectPassword()
+        public void HashPassword_ReturnEmptyString()
         {
-            Assert.AreEqual("1",ednevnik.HashPassword("", new byte[64]));
+            var salt = new byte[64];
+            Assert.AreEqual("",ednevnik.HashPassword("", out salt));
         }
+
+
+        [TestMethod]
+        public void HashPassword_ReturnCorrectHash()
+        {
+            var password = "test123";
+            var salt = new byte[64];
+            var hashedPassword = ednevnik.HashPassword(password, out salt);
+            var result = ednevnik.VerifyPassword(password, hashedPassword, salt);
+            Assert.IsTrue(result);
+        }
+        
+
     }
 }

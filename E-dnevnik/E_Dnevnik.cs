@@ -248,12 +248,16 @@ namespace Ednevnik
 
         
 		
-        public String HashPassword(String password, byte[] salt)
+        public String HashPassword(String password, out byte[] salt)
 		{
-			
+			salt = new byte[64];
 			return "";
 		}
 
+        public bool VerifyPassword(string password, string hash, byte[] salt)
+        {
+			return false;
+        }
 
 
         public string RegistrujUcenika(string ime, string prezime, string password)
