@@ -164,16 +164,7 @@ namespace Testovi
             Assert.AreEqual(username, ime.Substring(0, 1).ToLower() + prezime.ToLower() + "1");
         }
 
-        [TestMethod]
-        public void HashPasswordAndVerifyPassword_ShouldMatch()
-        {
-            Setup();
-            var password = "test123";
-            var salt = new byte[64];
-            var hashedPassword = eDnevnik.HashPassword(password, out salt);
-            var result = eDnevnik.VerifyPassword(password, hashedPassword, salt);
-            Assert.IsTrue(result);
-        }
+        
 
         public static IEnumerable<object[]> RezrediData
         {

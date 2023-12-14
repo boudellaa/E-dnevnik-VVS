@@ -21,6 +21,7 @@ namespace Ednevnik
 
         public List<Predmet> Predmeti { get; set; }
 
+		private  byte[] salt = new byte[64];
 
 		public E_Dnevnik()
 		{
@@ -246,52 +247,32 @@ namespace Ednevnik
         }
 
         
+		
+        
 
-        public String HashPassword(String password, out byte[] salt)
+
+
+        public string RegistrujUcenika(string ime, string prezime, string password)
         {
-			HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-			salt = RandomNumberGenerator.GetBytes(64);
-
-            var hash = Rfc2898DeriveBytes.Pbkdf2(
-                Encoding.UTF8.GetBytes(password),
-                salt,
-                350000,
-                hashAlgorithm,
-                64);
-
-            return Convert.ToHexString(hash);
+            string username = ime[0] + prezime;
+            if (username.Length > 10)
+                username = username.Substring(0, 10);
+            username = username + "1";
+            username = username.ToLower();
+            int br = 2;
+            while (Ucenici.Exists(u => u.KorisnickoIme == username))
+            {
+                username = username.Substring(0, username.Length - 1);
+                username = username + br.ToString();
+                br++;
+            }
+            var ucenik = new Ucenik((char.ToUpper(ime[0]) + ime.Substring(1).ToLower()), (char.ToUpper(prezime[0]) + prezime.Substring(1).ToLower()), username, password);
+            var random = new Random();
+            Ucenici.Add(ucenik);
+            DodajUcenikaURazred(ucenik, Razredi[random.Next(Razredi.Count - 1)]);
+            return username;
         }
-
-        public bool VerifyPassword(string password, string hash, byte[] salt)
-        {
-			HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-			var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, 350000, hashAlgorithm, 64);
-			return CryptographicOperations.FixedTimeEquals(hashToCompare, Convert.FromHexString(hash));
-		}
-
-
-	
-			public string RegistrujUcenika(string ime, string prezime, string password)
-	{
-		string username = ime[0] + prezime;
-		if (username.Length > 10)
-			username = username.Substring(0, 10);
-		username = username + "1";
-		username = username.ToLower();
-        int br = 2;
-        while (Ucenici.Exists(u => u.KorisnickoIme == username))
-		{
-			username = username.Substring(0, username.Length - 1);
-			username = username + br.ToString();
-			br++;
-		}
-		var ucenik = new Ucenik((char.ToUpper(ime[0]) + ime.Substring(1).ToLower()), (char.ToUpper(prezime[0]) + prezime.Substring(1).ToLower()), username, password);
-		var random = new Random();
-		Ucenici.Add(ucenik);
-		DodajUcenikaURazred(ucenik, Razredi[random.Next(Razredi.Count - 1)]);
-		return username;
-	}
-	}
+    }
 
 
 
