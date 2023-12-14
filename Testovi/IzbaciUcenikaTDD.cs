@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Testovi
 {
     [TestClass]
-    public class IzbaciUcenikaTDDcs
+    public class IzbaciUcenikaTDD
     {
         private E_Dnevnik ednevnik;
         private Razred razred;
@@ -38,8 +38,6 @@ namespace Testovi
         {
             Assert.IsTrue(razred.Ucenici.Contains(ucenici[1]));
             razred.IzbaciUcenika(ucenici[1]);
-
-
             Assert.IsTrue(!razred.Ucenici.Contains(ucenici[1]));
         }
 
