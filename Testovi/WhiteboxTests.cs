@@ -24,9 +24,9 @@ namespace Testovi
         [TestInitialize]
         public void TestInitialize()
         {
-             nastavnik = new Nastavnik("Kenan", "Dizdarevic", "kdizdarevi1", "12345");
-             ucenik = new Ucenik("Haris", "Dizdarevic", "harisd1", "1234");
-                razred = new Razred("Test");
+            nastavnik = new Nastavnik("Kenan", "Dizdarevic", "kdizdarevi1", "12345");
+            ucenik = new Ucenik("Haris", "Dizdarevic", "harisd1", "1234");
+            razred = new Razred("Test");
             predmet = new Predmet("Test");
         }
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Testovi
 
         }
 
-        
+
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -157,9 +157,9 @@ namespace Testovi
         [TestMethod]
         public void DajProsjekUcenikaNaPredmetu_Put1_VratiNula()
         {
-			razred.DodajUcenika(ucenik);
-			ednevnik.SpojiRazredIPredmet(razred, predmet);
-            
+            razred.DodajUcenika(ucenik);
+            ednevnik.SpojiRazredIPredmet(razred, predmet);
+
             Assert.AreEqual(0.0, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
 
 
@@ -185,6 +185,78 @@ namespace Testovi
 
             ucenik.DajProsjekUcenikaNaPredmetu(predmet);
 
+        }
+
+        [TestMethod]
+        public void RegistrujUcenika_PostojiUcenikIstogUsernamea_Put1_VracaUsername()
+        {
+            var ime = "berin";
+            var prezime = "neko";
+            var password = "123456";
+            ednevnik.RegistrujUcenika(ime, prezime, password);
+            ednevnik.RegistrujUcenika(ime, prezime, password);
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
+            Assert.AreEqual("bneko3", username);
+        }
+
+        [TestMethod]
+        public void RegistrujUcenika_UcenikSaPrezimenomVecimOdDeset_Put2_VracaUsername()
+        {
+            var ime = "berin";
+            var prezime = "nekonekoneko";
+            var password = "123456";
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
+            Assert.AreEqual("bnekonekon1", username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RegistrujUcenika_UcenikSaPraznimImenom_Put3_BacaIzuzetak()
+        {
+            var ime = "    ";
+            var prezime = "nekonekoneko";
+            var password = "123456";
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RegistrujUcenika_UcenikSaPraznimPrezimenom_Put4_BacaIzuzetak()
+        {
+            var ime = "berin";
+            var prezime = "    ";
+            var password = "123456";
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RegistrujUcenika_UcenikSaPraznimPasswordom_Put5_BacaIzuzetak()
+        {
+            var ime = "berin";
+            var prezime = "nekonekoneko";
+            var password = "  ";
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RegistrujUcenika_UcenikSaZnakovimaUImenu_Put6_BacaIzuzetak()
+        {
+            var ime = "berin250";
+            var prezime = "nekonekoneko";
+            var password = "123456";
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RegistrujUcenika_UcenikSaZnakovimaUPrezimenu_Put7_BacaIzuzetak()
+        {
+            var ime = "berin";
+            var prezime = "nekonekoneko55";
+            var password = "123456";
+            var username = ednevnik.RegistrujUcenika(ime, prezime, password);
         }
     }
 }
