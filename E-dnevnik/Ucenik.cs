@@ -46,10 +46,7 @@ namespace Ednevnik
 			Sifra = sifra;
 			Razred = razred;
 		}
-		public override string ToString()
-		{
-			return $"Ime: {Ime}, Prezime: {Prezime}, KorisnickoIme: {KorisnickoIme}, Sifra: {Sifra}";
-		}
+	
 
 		public List<Ocjena> DajSortiraneOcjenePoVrijednosti(List<Ocjena> ocjene)
 		{
@@ -74,9 +71,10 @@ namespace Ednevnik
 					brojOcjena++;
 				}
 			}
-			if (!check) throw new Exception("Ne postoji predmet sa ovim imenom!");
-			if (brojOcjena > 0) return temp / brojOcjena;
-			return 0;
+
+			if (brojOcjena == 0) return 0.0; 
+			else return (double)temp / brojOcjena;
+			
 		}
 
 

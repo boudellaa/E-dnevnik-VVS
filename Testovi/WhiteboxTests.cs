@@ -12,12 +12,22 @@ namespace Testovi
     {
         private Nastavnik nastavnik;
         private Ucenik ucenik;
+        private Razred razred;
+        private Predmet predmet;
+        private static E_Dnevnik ednevnik;
+        [ClassInitialize(InheritanceBehavior.None)]
+        public static void ClassInitialize(TestContext testContext)
+        {
+            ednevnik = new E_Dnevnik();
+        }
 
         [TestInitialize]
         public void TestInitialize()
         {
              nastavnik = new Nastavnik("Kenan", "Dizdarevic", "kdizdarevi1", "12345");
              ucenik = new Ucenik("Haris", "Dizdarevic", "harisd1", "1234");
+                razred = new Razred("Test");
+            predmet = new Predmet("Test");
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -142,6 +152,39 @@ namespace Testovi
             ucenik.Ocjene.Add(new Ocjena(6, ucenik, new Predmet("Math"), DateTime.Now));
 
             var prosjek = razred.DajProsjekRazreda();
+        }
+
+        [TestMethod]
+        public void DajProsjekUcenikaNaPredmetu_Put1_VratiNula()
+        {
+			razred.DodajUcenika(ucenik);
+			ednevnik.SpojiRazredIPredmet(razred, predmet);
+            
+            Assert.AreEqual(0.0, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
+
+
+        }
+
+        [TestMethod]
+        public void DajProsjekUcenikaNaPredmetu_Put2_VratiIspravanProsjek()
+        {
+            razred.DodajUcenika(ucenik);
+            ednevnik.SpojiRazredIPredmet(razred, predmet);
+            var ocjene = new List<Ocjena>() { new Ocjena(5, ucenik, predmet, DateTime.Now), new Ocjena(1, ucenik, predmet, DateTime.Now), new Ocjena(1, ucenik, predmet, DateTime.Now), new Ocjena(1, ucenik, predmet, DateTime.Now) };
+            ucenik.Ocjene.AddRange(ocjene);
+
+            Assert.AreEqual(2.0, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DajProsjekUcenikaNaPredmetu_Put3_Exception()
+        {
+            predmet = null;
+
+            ucenik.DajProsjekUcenikaNaPredmetu(predmet);
+
         }
     }
 }
