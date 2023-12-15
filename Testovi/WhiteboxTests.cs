@@ -107,5 +107,41 @@ namespace Testovi
             Assert.AreEqual(4.5, prosjek);
         }
 
+        [TestMethod]
+        public void DajProsjekRazreda_VracaTacanProsjek()
+        {
+            var razred = new Razred("r1");
+            var ucenik1 = new Ucenik("Test1", "Test1", "Test1", "Test1", razred);
+            var ucenik2 = new Ucenik("Test2", "Test2", "Test2", "Test2", razred);
+
+            ucenik1.Ocjene.Add(new Ocjena(4, ucenik1, new Predmet("Math"), DateTime.Now));
+            ucenik2.Ocjene.Add(new Ocjena(5, ucenik2, new Predmet("Math"), DateTime.Now));
+
+            razred.DodajUcenika(ucenik1);
+            razred.DodajUcenika(ucenik2);
+
+            var prosjek = razred.DajProsjekRazreda();
+
+            Assert.AreEqual(4.5, prosjek, 0.01);
+        }
+
+        [TestMethod]
+        public void DajProsjekRazreda_NemaOcjena_Izuzetak()
+        {
+            var razred = new Razred("r1");
+
+            Assert.ThrowsException<Exception>(() => razred.DajProsjekRazreda(), "Razred nema ocjena!");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Ocjena mora imati vrijednost od 1 do 5!")]
+        public void DajProsjekRazreda_NevalidnaOcjena_Izuzetak()
+        {
+            var razred = new Razred("r1");
+            var ucenik = new Ucenik("Test", "Test", "Test", "Test", razred);
+            ucenik.Ocjene.Add(new Ocjena(6, ucenik, new Predmet("Math"), DateTime.Now));
+
+            var prosjek = razred.DajProsjekRazreda();
+        }
     }
 }
