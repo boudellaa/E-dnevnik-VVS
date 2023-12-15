@@ -22,7 +22,7 @@ namespace Ednevnik
 
 		public List<Komentar> Komentari { get; set; } = new();
 
-		public Razred Razred { get; set; }
+		public Razred Razred { get; set; } 
 
 		public Ucenik()
 		{
@@ -35,7 +35,7 @@ namespace Ednevnik
 			Prezime = prezime;
 			KorisnickoIme = korisnickoIme;
 			Sifra = sifra;
-			Ocjene = new List<Ocjena>();
+			
 
 		}
 		public Ucenik(string ime, string prezime, string korisnickoIme, string sifra, Razred razred)
@@ -44,8 +44,6 @@ namespace Ednevnik
 			Prezime = prezime;
 			KorisnickoIme = korisnickoIme;
 			Sifra = sifra;
-			Ocjene = new List<Ocjena>();
-			Komentari = new List<Komentar>();
 			Razred = razred;
 		}
 		public override string ToString()
