@@ -95,30 +95,40 @@ public class Program
 			}
 			else if (izbor == "2")
 			{
-				string ime;
-				string prezime;
-				string username;
-				string password;
-				do
+				while (true)
 				{
-					Console.Clear();
-					Console.WriteLine("Unesite vaše podatke");
-					Console.WriteLine("Ime: ");
-					ime = Console.ReadLine();
-				} while (ime.Length == 0);
-				do
-				{
-					Console.WriteLine("Prezime: ");
-					prezime = Console.ReadLine();
-				} while (prezime.Length == 0);
-				do
-				{
-					Console.WriteLine("Password: ");
-					password = Console.ReadLine();
-				} while (password.Length == 0);
-				username = EDnevnik.RegistrujUcenika(ime, prezime, password);
-				Console.WriteLine("Vaš username je " + username + "\nPritisnite bilo šta da nastavite");
-				izbor = Console.ReadLine();
+                    string ime;
+                    string prezime;
+                    string username;
+                    string password;
+                    do
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Unesite vaše podatke");
+                        Console.WriteLine("Ime: ");
+                        ime = Console.ReadLine();
+                    } while (ime.Length == 0);
+                    do
+                    {
+                        Console.WriteLine("Prezime: ");
+                        prezime = Console.ReadLine();
+                    } while (prezime.Length == 0);
+                    do
+                    {
+                        Console.WriteLine("Password: ");
+                        password = Console.ReadLine();
+                    } while (password.Length == 0);
+					try
+                    {
+                        username = EDnevnik.RegistrujUcenika(ime, prezime, password);
+                        Console.WriteLine("Vaš username je " + username + "\nPritisnite bilo šta da nastavite");
+                        izbor = Console.ReadLine();
+                    }
+					catch(Exception ex) 
+					{
+						Console.WriteLine(ex);
+					}
+                }
 			}
 		}
 

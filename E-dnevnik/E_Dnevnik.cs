@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Metadata;
@@ -294,7 +295,27 @@ namespace Ednevnik
 
 		public string RegistrujUcenika(string ime, string prezime, string password)
 		{
-			string username = ime[0] + prezime;
+			if(string.IsNullOrEmpty(ime) || string.IsNullOrEmpty(ime.Trim()))
+			{
+				throw new ArgumentNullException("Polje ime ne može biti prazno.");
+			}
+			else if(string.IsNullOrEmpty(prezime) || string.IsNullOrEmpty(prezime.Trim()))
+            {
+                throw new ArgumentNullException("Polje prezime ne može biti prazno.");
+            }
+			else if(string.IsNullOrEmpty(password) || string.IsNullOrEmpty(password.Trim()))
+            {
+                throw new ArgumentNullException("Polje password ne može biti prazno.");
+            }
+			if (!ime.All(char.IsLetter))
+			{
+				throw new ArgumentException("Polje ime ne može sadržavati znakove ili brojeve.");
+			}
+			else if (!prezime.All(char.IsLetter))
+            {
+                throw new ArgumentException("Polje prezime ne može sadržavati znakove ili brojeve.");
+            }
+            string username = ime[0] + prezime;
 			if (username.Length > 10)
 				username = username.Substring(0, 10);
 			username = username + "1";
