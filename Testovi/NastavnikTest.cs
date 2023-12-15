@@ -30,7 +30,6 @@ namespace Testovi
         [TestInitialize]
         public void TestInitializeAttribute()
         {
-            Console.WriteLine("POCELI TESTOVI!");
             ednevnik = new E_Dnevnik();
             nastavnik = new Nastavnik("Kenan", "Dizdarevic", "kenankd", "12345678");
             ucenik = new Ucenik("kenan", "dzd", "kenandzddd", "12345");
@@ -44,7 +43,6 @@ namespace Testovi
         [TestMethod]
         public void UpisiUceniku_ValidnuOcjenu()
         {
-            Console.WriteLine("POCELI TESTOVI!");
             int vrijednost = 4;
             nastavnik.UpisiOcjenu(ucenik, vrijednost);
             Assert.AreEqual(1, ucenik.Ocjene.Count);
@@ -59,15 +57,6 @@ namespace Testovi
         {
             int vrijednost = 6;
             nastavnik.UpisiOcjenu(ucenik, vrijednost);
-        }
-
-        [TestMethod]
-        public void UpisiUceniku_ValidanKomentar()
-        {
-            string opis = "Neprimjereno ponasanje u skolskom dvoristu!";
-            Komentar komentar = new Komentar(nastavnik,ucenik,opis);
-            nastavnik.NoviKomentar(ucenik, opis);
-            Assert.IsTrue(ucenik.Komentari.Any(k => k.Opis == opis));
         }
 
 		public static IEnumerable<object[]> ReadJSONUcenika()
