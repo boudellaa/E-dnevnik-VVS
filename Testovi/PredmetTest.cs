@@ -8,16 +8,23 @@ namespace Testovi
 	[TestClass]
 	public class PredmetTest
 	{
-		private E_Dnevnik E_Dnevnik;
+		private static E_Dnevnik E_Dnevnik;
 		private Ucenik ucenik;
 		private Razred razred;
 		private Predmet predmet;
 		private Nastavnik nastavnik;
 
-		[TestInitialize]
-		public void Test2Initialize()
+		[ClassInitialize(InheritanceBehavior.None)]
+		public static void ClassInitialize(TestContext testContext)
 		{
 			E_Dnevnik = new E_Dnevnik();
+			
+		}
+
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			
 			predmet = new Predmet("TestPredmet");
 			ucenik = new Ucenik("Test", "Test", "Test", "Test");
 			razred = new Razred("TestRazred");
@@ -28,11 +35,10 @@ namespace Testovi
 			E_Dnevnik.SpojiNastavnikPredmet(nastavnik, predmet);
 		}
 
-
 		[TestMethod]
 		public void SpojiNastavnikPredmet_ProvjeraVezeNastavnikPredmet()
 		{
-			Test2Initialize();
+			
 
 			Assert.AreEqual(nastavnik, predmet.Nastavnik);
 			Assert.AreEqual(predmet, nastavnik.Predmet);
@@ -42,7 +48,6 @@ namespace Testovi
 		[TestMethod]
 		public void DajSveRazredeIUcenike_ProvjeraRazredaIUcenika()
 		{
-			Test2Initialize();
 			var razredi = predmet.DajSveRazredeNaPredmetu();
 			var ucenici = predmet.DajSveUcenikeNaPredmetu();
 
@@ -54,7 +59,7 @@ namespace Testovi
 		[TestMethod]
 		public void DodijeliNastavnika_NastavnikUspjesnoDodijeljen()
 		{
-			Test2Initialize();
+	
 			var mockNastavnik = new Mock<Nastavnik>("ime", "prezime", "korisnickoIme", "sifra").Object;
 
 			predmet.DodijeliNastavnika(mockNastavnik);
@@ -65,8 +70,7 @@ namespace Testovi
 
 		[TestMethod]
 		public void DajProsjekPredmeta_VracaProsjek()
-		{
-			Test2Initialize();
+		{ 
 
 			var jsonString = File.ReadAllText("../../../Ocjene.json");
 			var jsonOcjene = JsonSerializer.Deserialize<List<String>>(jsonString);
@@ -103,7 +107,7 @@ namespace Testovi
 		[TestMethod]
 		public void DajProsjekPredmeta_VracaProsjek3()
 		{
-			Test2Initialize();
+			
 
 			ucenik.Ocjene.Add(new Ocjena(5, ucenik, predmet, DateTime.Now));
 			ucenik.Ocjene.Add(new Ocjena(4, ucenik, predmet, DateTime.Now));

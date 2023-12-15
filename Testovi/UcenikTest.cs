@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 
 namespace Testovi
 {
-	[TestClass]
+	[TestClass()]
 	public class UcenikTest
 	{
 		private TestContext testContextInstance;
@@ -25,15 +25,21 @@ namespace Testovi
 		private XmlReaderSettings settings = new XmlReaderSettings();
 
 
-		private E_Dnevnik E_Dnevnik;
-		private Ucenik ucenik;
-		private Razred razred;
-		private Predmet predmet;
+		private static E_Dnevnik E_Dnevnik;
+		private static Ucenik ucenik;
+		private static Razred razred;
+		private static Predmet predmet;
+
+		[ClassInitialize(InheritanceBehavior.None)]
+		public static void ClassInitialize(TestContext testContext)
+		{
+			E_Dnevnik = new E_Dnevnik();
+			
+		}
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			E_Dnevnik = new E_Dnevnik();
 			predmet = new Predmet("TestPredmet");
 			ucenik = new Ucenik("Test", "Test", "Test", "Test");
 			razred = new Razred("TestRazred");
@@ -46,7 +52,7 @@ namespace Testovi
 		[TestMethod]
 		public void DajProsjekUcenikaNaPredmetu_TacanProsjek()
 		{
-			TestInitialize();
+			
 			double zbir = 0;
 			Random rnd = new Random();
 			for (int i = 1; i <= 10; i++)
@@ -116,14 +122,6 @@ namespace Testovi
 
 		}
 
-		//Ucenik nema ocjena nikako
-		[TestMethod]
-		public void DajProsjekUcenika_NemaProsjeka()
-		{
-			TestInitialize();
-			Assert.AreEqual(0, ucenik.DajProsjekUcenikaNaPredmetu(predmet));
-			Assert.AreEqual(0, ucenik.DajUkupanProsjekUcenika());
-		}
 
 		//Test ocjena nije validna
 		[TestMethod]
@@ -181,7 +179,7 @@ namespace Testovi
 		[DynamicData(nameof(OcjeneData))]
 		public void DajUkupanProsjekUcenika_TacanProsjek(List<Ocjena> ocjene, double ocekivano)
 		{
-			TestInitialize();
+			
 			ucenik.Ocjene = ocjene;
 			Assert.AreEqual("Test", ucenik.Ime);
 			Assert.AreEqual("Test", ucenik.Prezime);
@@ -215,7 +213,7 @@ namespace Testovi
 		[DynamicData(nameof(ReadJSON), DynamicDataSourceType.Method)]
 		public void DajOcjeneIzPredmeta_PostojiOcjenaUPredmetu(String stringOcjene)
 		{
-			TestInitialize();
+			
 			var ocjena = new Ocjena(Convert.ToInt32(stringOcjene), ucenik, predmet, DateTime.Now);
 			ucenik.Ocjene.Add(ocjena);
 

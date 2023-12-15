@@ -21,26 +21,32 @@ namespace Testovi
     [TestClass]
     public class NastavnikTest
     {
-        private  E_Dnevnik ednevnik;
+        private static E_Dnevnik ednevnik;
         private  Nastavnik nastavnik;
         private  Predmet predmet;
         private  Ucenik ucenik;
         private  Razred razred;
 
-        [TestInitialize]
-        public void TestInitializeAttribute()
+        [ClassInitialize(InheritanceBehavior.None)]
+        public static void TestInitializeAttribute(TestContext testContext)
         {
             ednevnik = new E_Dnevnik();
-            nastavnik = new Nastavnik("Kenan", "Dizdarevic", "kenankd", "12345678");
-            ucenik = new Ucenik("kenan", "dzd", "kenandzddd", "12345");
-            predmet = new Predmet("Bosanski");
-            razred = new Razred("IV-3");
-            ednevnik.SpojiNastavnikPredmet(nastavnik, predmet);
-            ednevnik.SpojiRazredIPredmet(razred, predmet);
-            ednevnik.DodajUcenikaURazred(ucenik, razred);
+           
         }
+		[TestInitialize]
+		public void TestInitializeAttribute()
+		{
+			
+			nastavnik = new Nastavnik("Kenan", "Dizdarevic", "kenankd", "12345678");
+			ucenik = new Ucenik("kenan", "dzd", "kenandzddd", "12345");
+			predmet = new Predmet("Bosanski");
+			razred = new Razred("IV-3");
+			ednevnik.SpojiNastavnikPredmet(nastavnik, predmet);
+			ednevnik.SpojiRazredIPredmet(razred, predmet);
+			ednevnik.DodajUcenikaURazred(ucenik, razred);
+		}
 
-        [TestMethod]
+		[TestMethod]
         public void UpisiUceniku_ValidnuOcjenu()
         {
             int vrijednost = 4;

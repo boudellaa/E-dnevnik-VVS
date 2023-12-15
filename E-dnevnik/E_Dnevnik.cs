@@ -258,6 +258,7 @@ namespace Ednevnik
 
 		public String HashPassword(String input)
 		{
+			if (input == "") return "";
 			byte[] salt = RandomNumberGenerator.GetBytes(_saltSize);
 			byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
 				input,

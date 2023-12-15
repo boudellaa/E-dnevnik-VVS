@@ -23,10 +23,10 @@ namespace Testovi
             get { return testContextInstance; }
             set { testContextInstance = value; }
         }
-        private E_Dnevnik eDnevnik;
+        private static E_Dnevnik eDnevnik;
 
-        [TestInitialize]
-        public void Setup()
+        [ClassInitialize(InheritanceBehavior.None)]
+        public static void Setup(TestContext testContext)
         {
             eDnevnik = new E_Dnevnik();
         }
@@ -34,7 +34,7 @@ namespace Testovi
         [TestMethod]
         public void DodajRazred_ShouldAddRazred()
         {
-            Setup();
+           
             var razred = new Razred("II-1");
             eDnevnik.DodajRazred(razred);
             Assert.IsTrue(eDnevnik.Razredi.Contains(razred));
@@ -52,7 +52,7 @@ namespace Testovi
         [TestMethod]
         public void PrikaziRazrede_ShouldDisplayRazredi()
         {
-            Setup();
+            
             var razred = new Razred("II-1");
             eDnevnik.Razredi.Add(razred);
             try
@@ -68,7 +68,7 @@ namespace Testovi
         [TestMethod]
         public void ValidirajLoginNastavnika_ShouldReturnNastavnikIfValid()
         {
-            Setup();
+            
             var username = "bera";
             var password = "12345";
             var result = eDnevnik.ValidirajLoginNastavnika(eDnevnik, username, password);
@@ -78,7 +78,7 @@ namespace Testovi
         [TestMethod]
         public void ValidirajLoginUcenika_ShouldReturnUcenikIfValid()
         {
-            Setup();
+         
             var username = "kenankd";
             var password = "123456";
             var result = eDnevnik.ValidirajLoginUcenika(eDnevnik, username, password);
@@ -89,7 +89,7 @@ namespace Testovi
         [ExpectedException(typeof(Exception))]
         public void DajOcjene_ShouldAddOcjeneToUcenik()
         {
-            Setup();
+            
             var ucenik = new Ucenik("Test", "Ucenik", "testucenik", "test123");
             eDnevnik.DajOcjene(ucenik);
         }
@@ -97,7 +97,7 @@ namespace Testovi
         [TestMethod]
         public void SpojiRazredIPredmet_ShouldConnectRazredAndPredmet()
         {
-            Setup();
+         
             var razred = new Razred("II-1");
             var predmet = new Predmet("TestPredmet");
             eDnevnik.SpojiRazredIPredmet(razred, predmet);
@@ -107,7 +107,7 @@ namespace Testovi
         [TestMethod]
         public void SpojiNastavnikPredmet_ShouldConnectNastavnikAndPredmet()
         {
-            Setup();
+         
             var nastavnik = new Nastavnik("Test", "Nastavnik", "testnastavnik", "test123");
             var predmet = new Predmet("TestPredmet");
             eDnevnik.SpojiNastavnikPredmet(nastavnik, predmet);
@@ -117,7 +117,7 @@ namespace Testovi
         [TestMethod]
         public void DodajUcenikaURazred_ShouldAddUcenikToRazred()
         {
-            Setup();
+         
             var razred = new Razred("II-1");
             var ucenik = new Ucenik("Test", "Ucenik", "testucenik", "test123");
             eDnevnik.DodajUcenikaURazred(ucenik, razred);
@@ -155,7 +155,7 @@ namespace Testovi
         [DynamicData(nameof(UceniciXML))]
         public void RegistrujUcenika_ShouldRegisterUcenik(string ime, string prezime, string password)
         {
-            Setup();
+           
             var username = eDnevnik.RegistrujUcenika(ime, prezime, password);
             var username2 = ime.Substring(0, 1) + prezime.ToLower() + "1";
             Assert.IsNotNull(username);
@@ -182,7 +182,7 @@ namespace Testovi
         [DynamicData(nameof(RezrediData))]
         public void DodajUcenikaURazred_ShouldChangeRazredSize(String razredName)
         {
-            Setup();
+         
             var ucenik = new Mock<Ucenik>(null, null, null, null);
             var razred = eDnevnik.Razredi.Where(r => r.Ime == razredName).FirstOrDefault();
             var numStudentsBefore = eDnevnik.Razredi.FirstOrDefault(r => r.Ime == razredName)?.Ucenici.Count ?? 0;

@@ -11,10 +11,10 @@ namespace Testovi
 	[TestClass]
 	public class hashTDD
 	{
-		private E_Dnevnik ednevnik;
+		private static E_Dnevnik ednevnik;
 
-		[TestInitialize]
-		public void TestInitialize()
+		[ClassInitialize(InheritanceBehavior.None)]
+		public static void ClassInitialize(TestContext testContext)
 		{
 			ednevnik = new E_Dnevnik();
 

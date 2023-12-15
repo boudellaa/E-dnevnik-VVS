@@ -10,20 +10,26 @@ namespace Testovi
     [TestClass]
     public class IzbaciUcenikaTDD
     {
-        private E_Dnevnik ednevnik;
-        private Razred razred;
-        private List<Ucenik> ucenici;
+        private static E_Dnevnik ednevnik;
+        private  Razred razred;
+        private  List<Ucenik> ucenici;
         
+        [ClassInitialize(InheritanceBehavior.None)]
+        public static void ClassInitialize(TestContext testContext)
+        {
+            ednevnik = new E_Dnevnik();
+            
+            
+        }
+
         [TestInitialize]
         public void TestInitialize()
         {
-            ednevnik = new E_Dnevnik();
-            razred = new Razred("Test");
-            ucenici = new List<Ucenik>() { new Ucenik("Test1", "Test1", "test", "test", razred), new Ucenik("test2", "test2", "test2", "test2", razred), new Ucenik("test3", "test3", "test3", "test3")};
-            razred.DodajUcenika(ucenici[0]);
-            razred.DodajUcenika(ucenici[1]);
-            
-        }
+			razred = new Razred("Test");
+			ucenici = new List<Ucenik>() { new Ucenik("Test1", "Test1", "test", "test", razred), new Ucenik("test2", "test2", "test2", "test2", razred), new Ucenik("test3", "test3", "test3", "test3") };
+			razred.DodajUcenika(ucenici[0]);
+			razred.DodajUcenika(ucenici[1]);
+		}
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
