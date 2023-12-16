@@ -149,9 +149,10 @@ namespace Testovi
         {
             var razred = new Razred("r1");
             var ucenik = new Ucenik("Test", "Test", "Test", "Test", razred);
-            ucenik.Ocjene.Add(new Ocjena(6, ucenik, new Predmet("Math"), DateTime.Now));
+            razred.Ucenici.Add(ucenik);
+            ucenik.Ocjene.Add(new Ocjena(8, ucenik, new Predmet("Math"), DateTime.Now));
 
-            var prosjek = razred.DajProsjekRazreda();
+             razred.DajProsjekRazreda();
         }
 
         [TestMethod]

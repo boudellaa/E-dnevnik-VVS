@@ -131,7 +131,9 @@ namespace Testovi
 
             Assert.ThrowsException<Exception>(() =>
             {
-                ucenik2.Ocjene.Add(new Ocjena(6, new UcenikDummy(), new Predmet("Test"), DateTime.Now));
+                var ocjena = new Ocjena(6, new UcenikDummy(), new Predmet("Test"), DateTime.Now);
+                Ocjena.ValidirajOcjenu(ocjena.Vrijednost);
+				ucenik2.Ocjene.Add(ocjena);
 
                 var prosjek = razred.DajProsjekRazreda();
             });

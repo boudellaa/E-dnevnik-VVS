@@ -36,10 +36,13 @@ namespace Ednevnik
                 {
                     try
                     {
-                        Ocjena.ValidirajOcjenu(ocjena.Vrijednost);
+						
+						Ocjena.ValidirajOcjenu(ocjena.Vrijednost);
+                        
                     }
                     catch (Exception e) 
                     {
+                        
                         throw new Exception("Ocjena mora imati vrijednost od 1 do 5!");
                     }
                     if (ocjena.Vrijednost != 0)

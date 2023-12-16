@@ -23,7 +23,7 @@ namespace Ednevnik
 
         public Ocjena(int vrijednost, IUcenik ucenik, Predmet predmet, DateTime datum)
 		{
-            ValidirajOcjenu(vrijednost);
+           // ValidirajOcjenu(vrijednost);
 			Vrijednost = vrijednost;
 			Ucenik = ucenik;
 			Predmet = predmet;

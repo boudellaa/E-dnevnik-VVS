@@ -129,6 +129,7 @@ namespace Testovi
 		public void ValidirajOcjenu_Exception()
 		{
 			var ocjena = new Ocjena(55, new UcenikDummy(), new Predmet("Test"), DateTime.Now);
+			Ocjena.ValidirajOcjenu(ocjena.Vrijednost);
 
 		}
 
