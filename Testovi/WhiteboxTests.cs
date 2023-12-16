@@ -70,23 +70,9 @@ namespace Testovi
             Assert.IsTrue(ucenik.Komentari.Any(k => k.Opis == opis));
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void DajProsjekPredmeta_NemaRazredaSImenomPredmeta_BacaException()
-        {
-
-            var predmet = new Predmet("Historija");
-
-            var prosjek = predmet.DajProsjekPredmeta();
-
-        }
-
-
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void DajProsjekPredmeta_NemaUcenikaURazredu_BacaException()
+        public void DajProsjekPredmeta_Put1_BacaException()
         {
 
             var predmet = new Predmet("Hemija");
@@ -99,9 +85,8 @@ namespace Testovi
             Assert.AreEqual(0, prosjek);
         }
 
-
         [TestMethod]
-        public void DajProsjekPredmeta_JedanRazredSocjenama_VracaProsjekOcjena()
+        public void DajProsjekPredmeta_Put2_VracaIspravanProsjek()
         {
             var predmet = new Predmet("Matematika");
             var razred = new Razred("4C");
@@ -117,6 +102,20 @@ namespace Testovi
 
             Assert.AreEqual(4.5, prosjek);
         }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DajProsjekPredmeta_Put3_BacaException()
+        {
+
+            var predmet = new Predmet("Historija");
+
+            var prosjek = predmet.DajProsjekPredmeta();
+
+        }
+
+
 
         [TestMethod]
         public void DajProsjekRazreda_VracaTacanProsjek()

@@ -59,8 +59,7 @@ namespace Ednevnik
 			{
 				throw new Exception("Ne postoji razred s ovim predmetom");
 			}
-			if (brojac != 0) return temp / brojac;
-			return 0;
+			return temp / brojac;
 		}
 
 
