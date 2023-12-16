@@ -29,9 +29,17 @@ namespace Testovi
             razred = new Razred("Test");
             predmet = new Predmet("Test");
         }
+
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void NoviKomentar_UcenikNull_BacaException()
+        public void NoviKomentar_Put1_BacaException()
+        {
+            nastavnik.NoviKomentar(ucenik, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void NoviKomentar_Put2_BacaException()
         {
             string opis = "Neprimjereno ponasanje u skolskom dvoristu!";
             nastavnik.NoviKomentar(null, opis);
@@ -39,21 +47,14 @@ namespace Testovi
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void NoviKomentar_OpisNull_BacaException()
-        {
-            nastavnik.NoviKomentar(ucenik, null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void NoviKomentar_OpisPrazanString_BacaException()
+        public void NoviKomentar_Put3_BacaException()
         {
             nastavnik.NoviKomentar(ucenik, "");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void NoviKomentar_KomentariUcenikaNull_BacaException()
+        public void NoviKomentar_Put4_BacaException()
         {
             ucenik.Komentari = null;
             string opis = "Kasni na cas!";
@@ -61,7 +62,7 @@ namespace Testovi
         }
 
         [TestMethod]
-        public void UpisiUceniku_ValidanKomentar()
+        public void NoviKomentar_Put5_ValidanKomentar()
         {
             string opis = "Neprimjereno ponasanje u skolskom dvoristu!";
             Komentar komentar = new Komentar(nastavnik, ucenik, opis);
