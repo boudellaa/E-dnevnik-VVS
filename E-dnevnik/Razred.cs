@@ -34,7 +34,11 @@ namespace Ednevnik
                 brojac = 0;
                 foreach(var ocjena in x.Ocjene)
                 {
-                    if (!Ocjena.ValidirajOcjenu(ocjena.Vrijednost))
+                    try
+                    {
+                        Ocjena.ValidirajOcjenu(ocjena.Vrijednost);
+                    }
+                    catch (Exception e) 
                     {
                         throw new Exception("Ocjena mora imati vrijednost od 1 do 5!");
                     }
